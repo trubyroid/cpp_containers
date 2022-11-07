@@ -23,8 +23,8 @@ namespace ft
             size_type												_size;
 	        size_type												_capacity;
 			allocator_type											_allocator;
-        public:
 			value_type												*_base_array;
+        public:
 // --------------------- Construct/Copy/Destruct --------------------- //		
             explicit vector();
 			explicit vector(size_type size, const value_type& val = value_type());
