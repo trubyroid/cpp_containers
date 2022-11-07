@@ -22,14 +22,29 @@ namespace ft
         private:
             size_type												_size;
 	        size_type												_capacity;
-			value_type												*_base_array;
 			allocator_type											_allocator;
-
-			
         public:
+			value_type												*_base_array;
+// --------------------- Construct/Copy/Destruct --------------------- //		
             explicit vector();
-			// vector(size_type size, value_type val = value_type());
+			explicit vector(size_type size, const value_type& val = value_type());
+			vector(const vector& copy);
+
+			vector &operator=(const vector& copy);
+
 			~vector();
+
+
+// --------------------- Capacity ------------------------------------ //
+
+			bool			empty() const;
+			size_type		size() const;
+			size_type		max_size() const;
+			size_type		capacity() const;
+			void			reserve(size_type new_cap);
+			
+
+
 
 			// void			doublingCapacity();
 			// void			push_back(const value_type &val);
