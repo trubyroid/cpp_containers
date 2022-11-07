@@ -53,6 +53,12 @@ vector<value_type> &vector<value_type>::operator=(const vector& copy) {
 }
 
 template<class value_type>
+typename vector<value_type>::allocator_type
+vector<value_type>::get_allocator() const {
+    return this->_allocator;
+}
+
+template<class value_type>
 vector<value_type>::~vector() {
     if (this->empty()) {
         this->_allocator.deallocate(this->_base_array, this->_capacity);

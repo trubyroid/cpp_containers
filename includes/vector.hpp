@@ -25,31 +25,39 @@ namespace ft
 			allocator_type											_allocator;
 			value_type												*_base_array;
         public:
-// --------------------- Construct/Copy/Destruct --------------------- //		
+// --------------------- Member functions --------------------- //		
             explicit vector();
 			explicit vector(size_type size, const value_type& val = value_type());
 			vector(const vector& copy);
-
-			vector &operator=(const vector& copy);
-
 			~vector();
 
+			vector			&operator=(const vector& copy);
 
-// --------------------- Capacity ------------------------------------ //
+			// void			assign(size_type count, const value_type& val);
+			allocator_type	get_allocator() const;
+// --------------------- Element Access ----------------------- //
+
+// --------------------- Iterators ---------------------------- //
+
+// --------------------- Capacity ----------------------------- //
 
 			bool			empty() const;
 			size_type		size() const;
 			size_type		max_size() const;
 			size_type		capacity() const;
 			void			reserve(size_type new_cap);
+
+// --------------------- Modifiers ---------------------------- //
 			
+			// void			push_back(const value_type &val);
 
 
 
 			// void			doublingCapacity();
-			// void			push_back(const value_type &val);
-			void			print_test();
     };
+
+// --------------------- Non-member functions ----------------- //
+
 }
 
 # include "../srcs/vector.tpp"
