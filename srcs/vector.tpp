@@ -37,6 +37,30 @@ vector<value_type>::vector(const vector& copy) {
 }
 
 template<class value_type>
+typename vector<value_type>::allocator_type
+vector<value_type>::get_allocator() const {
+    return this->_allocator;
+}
+
+template<class value_type>
+void vector<value_type>::assign(size_type count, const value_type& val) {
+    this->resize(count, val);
+}
+
+
+
+template<class value_type>
+vector<value_type>::~vector() {
+    if (this->empty()) {
+        this->_allocator.deallocate(this->_base_array, this->_capacity);
+    }
+}
+
+// --------------------- Element Access ------------------------------ //
+
+// --------------------- Operators ----------------------------------- //
+
+template<class value_type>
 vector<value_type> &vector<value_type>::operator=(const vector& copy) {
     if (this == &copy)
         return *this;
@@ -50,19 +74,6 @@ vector<value_type> &vector<value_type>::operator=(const vector& copy) {
         this->_base_array[i] = copy._base_array[i];
     }
     return *this;
-}
-
-template<class value_type>
-typename vector<value_type>::allocator_type
-vector<value_type>::get_allocator() const {
-    return this->_allocator;
-}
-
-template<class value_type>
-vector<value_type>::~vector() {
-    if (this->empty()) {
-        this->_allocator.deallocate(this->_base_array, this->_capacity);
-    }
 }
 
 // --------------------- Capacity ------------------------------------ //
@@ -104,6 +115,23 @@ void vector<value_type>::reserve(size_type new_cap) {
         this->_base_array = _new_array;
         this->_capacity = new_cap;
     }
+}
+
+// --------------------- Modifiers ----------------------------------- //
+
+template<class value_type>
+void vector<value_type>::resize(size_type count, const value_type& val) {
+    if (count > this->max_size())
+        throw std::length_error("resize vector");
+	if (this->_base_array) {
+		this->_allocator.deallocate(this->_base_array, this->_capacity);
+	}
+	this->_base_array = this->_allocator.allocate(count);
+	this->_size = count;
+	this->_capacity = count;
+	for (size_type i = 0; i < this->_size; ++i) {
+		this->_base_array[i] = val;
+	}
 }
 
 // template<class value_type>
