@@ -121,17 +121,31 @@ void vector<value_type>::reserve(size_type new_cap) {
 
 template<class value_type>
 void vector<value_type>::resize(size_type count, const value_type& val) {
-    if (count > this->max_size())
-        throw std::length_error("resize vector");
-	if (this->_base_array) {
-		this->_allocator.deallocate(this->_base_array, this->_capacity);
+    if (count < 0 || count > this->max_size())
+        throw std::length_error("resize vector");  
+    if (count >= this->_capacity) {
+        if (this->_size == this->_capacity) {
+            reserve(this->_capacity * 2);
+        }
+        reserve(count);
 	}
-	this->_base_array = this->_allocator.allocate(count);
-	this->_size = count;
-	this->_capacity = count;
-	for (size_type i = 0; i < this->_size; ++i) {
-		this->_base_array[i] = val;
+    else {
+        pointer  _new_array = this->_allocator.allocate(_capacity);
+        if (!this->_base_array) {
+            throw std::bad_alloc();
+        }
+        for (size_type i = 0; i < count; i++) {
+            _new_array[i] = this->_base_array[i];
+        }
+        this->_allocator.deallocate(this->_base_array, this->_capacity);
+        this->_base_array = _new_array;
+        this->_size = count;
+    }
+	for (; this->_size < count; this->_size++) {
+		this->_base_array[this->_size] = val;
 	}
+}
+
 }
 
 // template<class value_type>
@@ -154,4 +168,4 @@ void vector<value_type>::resize(size_type count, const value_type& val) {
 //     _allocator.construct(_base_array + _size++, val);
 // }
 
-}
+// }

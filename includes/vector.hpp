@@ -23,8 +23,8 @@ namespace ft
             size_type												_size;
 	        size_type												_capacity;
 			allocator_type											_allocator;
-			value_type												*_base_array;
         public:
+			value_type												*_base_array;
 // --------------------- Member functions --------------------- //		
             explicit vector();
 			explicit vector(size_type size, const value_type& val = value_type());
@@ -32,11 +32,11 @@ namespace ft
 			~vector();
 
 
-			template<class InputIt>
-			typename ft::enable_if
-			< !ft::is_integral< InputIterator >::value, 
-			void >::type	assign( InputIt first, InputIt last );
-			void			assign(size_type count, const value_type& val);
+			// template<class InputIt>
+			// typename ft::enable_if
+			// < !ft::is_integral< InputIterator >::value, 
+			// void >::type	assign( InputIt first, InputIt last );
+			// void			assign(size_type count, const value_type& val);
 
 			allocator_type	get_allocator() const;
 // --------------------- Element Access ----------------------- //
@@ -58,7 +58,7 @@ namespace ft
 // --------------------- Modifiers ---------------------------- //
 			
 			// void			push_back(const value_type &val);
-
+			void			resize(size_type cout, const value_type& val);
 
 
 			// void			doublingCapacity();
