@@ -44,7 +44,20 @@ vector<value_type>::get_allocator() const {
 
 template<class value_type>
 void vector<value_type>::assign(size_type count, const value_type& val) {
-    this->resize(count, val);
+    if (count < 0 || count > this->max_size())
+        throw std::length_error("assign vector");
+    this->_allocator.deallocate(this->_base_array, this->_capacity);
+    if (this->_capacity < count) {
+        this->_capacity = count;
+    }
+    this->_base_array = this->_allocator.allocate(this->_capacity);
+    if (!this->_base_array) {
+        throw std::bad_alloc();
+    }
+    this->_size = count;
+    for (size_type i = 0; i < this->_size; i++) {
+        this->_base_array[i] = val;
+    }
 }
 
 
@@ -105,7 +118,7 @@ template<class value_type>
 void vector<value_type>::reserve(size_type new_cap) {
     if (new_cap > _capacity) {
         pointer  _new_array = this->_allocator.allocate(new_cap);
-        if (!this->_base_array) {
+        if (!_new_array) {
             throw std::bad_alloc();
         }
         for (size_type i = 0; i < this->_size; i++) {
@@ -131,7 +144,7 @@ void vector<value_type>::resize(size_type count, const value_type& val) {
 	}
     else {
         pointer  _new_array = this->_allocator.allocate(_capacity);
-        if (!this->_base_array) {
+        if (!_new_array) {
             throw std::bad_alloc();
         }
         for (size_type i = 0; i < count; i++) {

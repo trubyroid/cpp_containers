@@ -36,7 +36,7 @@ namespace ft
 			// typename ft::enable_if
 			// < !ft::is_integral< InputIterator >::value, 
 			// void >::type	assign( InputIt first, InputIt last );
-			// void			assign(size_type count, const value_type& val);
+			void			assign(size_type count, const value_type& val);
 
 			allocator_type	get_allocator() const;
 // --------------------- Element Access ----------------------- //
