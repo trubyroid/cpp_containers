@@ -44,8 +44,9 @@ vector<value_type>::get_allocator() const {
 
 template<class value_type>
 void vector<value_type>::assign(size_type count, const value_type& val) {
-    if (count < 0 || count > this->max_size())
+    if (count < 0 || count > this->max_size()) {
         throw std::length_error("assign vector");
+    }
     for (size_type i = 0; i < this->_size; i++) {
         this->_allocator.destroy(this->_base_array + i);
     }
@@ -53,17 +54,17 @@ void vector<value_type>::assign(size_type count, const value_type& val) {
     if (this->_capacity < count) {
         this->_capacity = count;
     }
-    this->_base_array = this->_allocator.allocate(this->_capacity);
-    if (!this->_base_array) {
+    value_type *_new_array = this->_allocator.allocate(this->_capacity);
+    if (!_new_array) {
         throw std::bad_alloc();
     }
-    this->_size = count;
-    for (size_type i = 0; i < this->_size; i++) {
-        this->_allocator.construct(this->_base_array + i, val);
+    for (size_type i = 0; i < count; i++) {
+        this->_allocator.construct(_new_array + i, val);
     }
+    this->_size = count;
+    this->_base_array = _new_array;
+    _new_array = NULL;
 }
-
-
 
 template<class value_type>
 vector<value_type>::~vector() {
@@ -150,19 +151,20 @@ void vector<value_type>::resize(size_type count, const value_type& val) {
         reserve(count);
 	}
     else {
-        pointer  _new_array = this->_allocator.allocate(_capacity);
+        pointer  _new_array = this->_allocator.allocate(this->_capacity);
         if (!_new_array) {
             throw std::bad_alloc();
         }
         for (size_type i = 0; i < count; i++) {
-            _new_array[i] = this->_base_array[i];
+            this->_allocator.construct(_new_array + i, *(this->_base_array + i));
         }
         for (size_type i = 0; i < this->_size; i++) {
             this->_allocator.destroy(this->_base_array + i);
         }
         this->_allocator.deallocate(this->_base_array, this->_capacity);
-        this->_base_array = _new_array;
         this->_size = count;
+        this->_base_array = _new_array;
+        _new_array = NULL;
     }
 	for (; this->_size < count; this->_size++) {
         this->_allocator.construct(this->_base_array + this->_size, val);

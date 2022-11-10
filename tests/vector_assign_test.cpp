@@ -79,7 +79,8 @@ int main() {
         cout << "Size: " << vec.size() << endl;
         cout << "Capacity: " << vec.capacity() << endl;
         cout << endl << endl;
-    }        
+    }   
+
     {
         vec.assign(4,6);
         point = vec._base_array;
@@ -119,17 +120,4 @@ int main() {
         cout << endl << endl;
     }
 
-    // {
-    //     vec.assign(2,4);
-    //     point = vec._base_array;
-    //     while (*point) {
-    //         cout << *point;
-    //         point++;
-    //     }
-    //     cout << endl;
-    //     cout << "Size: " << vec.size() << endl;
-    //     cout << "Capacity: " << vec.capacity() << endl;
-    //     cout << endl << endl;
-    // }
-    // while(1);
 }
