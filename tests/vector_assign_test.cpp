@@ -69,10 +69,9 @@ int main() {
     cout << "MY VECTOR:" << endl << endl;
     ft::vector<int> vec(3, 5);
     int *point;
-    int *point1;
     {       
         point = vec._base_array;
-        while (*point != 0) {
+        while (*point) {
             cout << *point;
             point++;
         }
@@ -82,9 +81,9 @@ int main() {
         cout << endl << endl;
     }        
     {
-        vec.assign(5,6);
+        vec.assign(4,6);
         point = vec._base_array;
-        while (*point != 0) {
+        while (*point) {
             cout << *point;
             point++;
         }
@@ -97,19 +96,6 @@ int main() {
     {
         vec.assign(4,8);
         point = vec._base_array;
-        while (*point != 0) {
-            cout << *point;
-            point++;
-        }
-        cout << endl;
-        cout << "Size: " << vec.size() << endl;
-        cout << "Capacity: " << vec.capacity() << endl;
-        cout << endl << endl;
-    }
-
-    {
-        vec.assign(3,9);
-        point = vec._base_array;
         while (*point) {
             cout << *point;
             point++;
@@ -121,7 +107,7 @@ int main() {
     }
 
     {
-        vec.assign(2,4);
+        vec.assign(2,9);
         point = vec._base_array;
         while (*point) {
             cout << *point;
@@ -132,5 +118,18 @@ int main() {
         cout << "Capacity: " << vec.capacity() << endl;
         cout << endl << endl;
     }
-    while(1);
+
+    // {
+    //     vec.assign(2,4);
+    //     point = vec._base_array;
+    //     while (*point) {
+    //         cout << *point;
+    //         point++;
+    //     }
+    //     cout << endl;
+    //     cout << "Size: " << vec.size() << endl;
+    //     cout << "Capacity: " << vec.capacity() << endl;
+    //     cout << endl << endl;
+    // }
+    // while(1);
 }

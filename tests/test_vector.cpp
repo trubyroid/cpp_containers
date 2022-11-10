@@ -50,7 +50,7 @@ int main() {
     
     cout << endl << "size:" << vector4.size();
     cout << endl << "capacity:" << vector4.capacity() << endl;
-
+                                                                                //сделать тесты конструкторов копирования!!!
 
     return 0;
 }

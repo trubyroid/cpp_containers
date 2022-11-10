@@ -19,7 +19,7 @@ vector<value_type>::vector(size_type size, const value_type& val) {
         throw std::bad_alloc();
     }
     for (size_type i = 0; i < size; i++) {
-        this->_base_array[i] = val;
+        this->_allocator.construct(this->_base_array + i, val);
     }
 }
 
@@ -31,8 +31,8 @@ vector<value_type>::vector(const vector& copy) {
     if (!this->_base_array) {
         throw std::bad_alloc();
     }
-    for (size_type i = 0; i < this->size; i++) {
-        this->_base_array[i] = copy._base_array[i];
+    for (size_type i = 0; i < copy.size(); i++) {
+        this->_allocator.construct(this->_base_array + i, copy->_base_array + i);
     }
 }
 
@@ -46,6 +46,9 @@ template<class value_type>
 void vector<value_type>::assign(size_type count, const value_type& val) {
     if (count < 0 || count > this->max_size())
         throw std::length_error("assign vector");
+    for (size_type i = 0; i < this->_size; i++) {
+        this->_allocator.destroy(this->_base_array + i);
+    }
     this->_allocator.deallocate(this->_base_array, this->_capacity);
     if (this->_capacity < count) {
         this->_capacity = count;
@@ -56,7 +59,7 @@ void vector<value_type>::assign(size_type count, const value_type& val) {
     }
     this->_size = count;
     for (size_type i = 0; i < this->_size; i++) {
-        this->_base_array[i] = val;
+        this->_allocator.construct(this->_base_array + i, val);
     }
 }
 
@@ -64,7 +67,10 @@ void vector<value_type>::assign(size_type count, const value_type& val) {
 
 template<class value_type>
 vector<value_type>::~vector() {
-    if (this->empty()) {
+    for (size_type i = 0; i < this->_size; i++) {
+        this->_allocator.destroy(this->_base_array + i);
+    }
+    if (!this->empty()) {
         this->_allocator.deallocate(this->_base_array, this->_capacity);
     }
 }
@@ -83,8 +89,8 @@ vector<value_type> &vector<value_type>::operator=(const vector& copy) {
     if (!this->_base_array) {
         throw std::bad_alloc();
     }
-    for (size_type i = 0; i < this->size; i++) {
-        this->_base_array[i] = copy._base_array[i];
+    for (size_type i = 0; i < copy.size(); i++) {
+        this->_allocator.construct(this->_base_array + i, copy->_base_array + i);
     }
     return *this;
 }
@@ -122,7 +128,8 @@ void vector<value_type>::reserve(size_type new_cap) {
             throw std::bad_alloc();
         }
         for (size_type i = 0; i < this->_size; i++) {
-            _new_array[i] = this->_base_array[i];
+            this->_allocator.construct(_new_array + i, *(this->_base_array + i));
+            this->_allocator.destroy(this->_base_array + i);
         }
         this->_allocator.deallocate(this->_base_array, this->_capacity);
         this->_base_array = _new_array;
@@ -150,12 +157,15 @@ void vector<value_type>::resize(size_type count, const value_type& val) {
         for (size_type i = 0; i < count; i++) {
             _new_array[i] = this->_base_array[i];
         }
+        for (size_type i = 0; i < this->_size; i++) {
+            this->_allocator.destroy(this->_base_array + i);
+        }
         this->_allocator.deallocate(this->_base_array, this->_capacity);
         this->_base_array = _new_array;
         this->_size = count;
     }
 	for (; this->_size < count; this->_size++) {
-		this->_base_array[this->_size] = val;
+        this->_allocator.construct(this->_base_array + this->_size, val);
 	}
 }
 
