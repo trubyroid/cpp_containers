@@ -31,19 +31,17 @@ namespace ft
 			vector(const vector& copy);
 			~vector();
 
-
-			// template<class InputIt>
-			// typename ft::enable_if
-			// < !ft::is_integral< InputIterator >::value, 
-			// void >::type	assign( InputIt first, InputIt last );
+			// template< class InputIt >
+			// void assign( InputIt first, InputIt last,
+			// 			typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL);
 			void			assign(size_type count, const value_type& val);
-
 			allocator_type	get_allocator() const;
 // --------------------- Element Access ----------------------- //
 
 // --------------------- Operators ---------------------------- //
 
 			vector			&operator=(const vector& copy);
+			bool			operator==(const vector& other);
 
 // --------------------- Iterators ---------------------------- //
 

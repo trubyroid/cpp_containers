@@ -26,21 +26,51 @@ vector<value_type>::vector(size_type size, const value_type& val) {
 template<class value_type>
 vector<value_type>::vector(const vector& copy) {
     this->_size = copy.size();
-    this->capacity = copy.capacity();
-    this->_base_array = this->_allocator.allocate(this->_size);
+    this->_capacity = copy.capacity();
+    this->_base_array = this->_allocator.allocate(this->_capacity);
     if (!this->_base_array) {
         throw std::bad_alloc();
     }
     for (size_type i = 0; i < copy.size(); i++) {
-        this->_allocator.construct(this->_base_array + i, copy->_base_array + i);
+        this->_allocator.construct(this->_base_array + i, *(copy._base_array + i));
     }
 }
 
 template<class value_type>
-typename vector<value_type>::allocator_type
-vector<value_type>::get_allocator() const {
-    return this->_allocator;
+vector<value_type>::~vector() {
+    for (size_type i = 0; i < this->_size; i++) {
+        this->_allocator.destroy(this->_base_array + i);
+    }
+    if (!this->empty()) {
+        this->_allocator.deallocate(this->_base_array, this->_capacity);
+    }
 }
+
+// template<class value_type>
+// template<class InputIterator>
+// void vector<value_type>::assign(InputIterator first, InputIterator last,
+// 	typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type*) {
+//     if (first > last) {
+// 		throw std::length_error("vector");
+// 	}
+//     if (this->_base_array) {
+//         for (size_type i = 0; i < this->_size; i++) {
+//             this->_allocator.destroy(this->_base_array + i);
+//         }
+//         if (!this->empty()) {
+//             this->_allocator.deallocate(this->_base_array, this->_capacity);
+//         }
+//     }
+//     InputIt tmp = first;
+//     difference_type n = ft::distance(tmp, last);
+//     this->_base_array = this->_allocator.allocate(this->_capacity);      //n?
+//     this->_size = n;
+//     // this->_capacity = n;
+//     for (size_type i = 0; first != last; ++i) {
+// 		this->_base_array[i] = *first;
+// 		++first;
+// 	}
+// }
 
 template<class value_type>
 void vector<value_type>::assign(size_type count, const value_type& val) {
@@ -67,13 +97,9 @@ void vector<value_type>::assign(size_type count, const value_type& val) {
 }
 
 template<class value_type>
-vector<value_type>::~vector() {
-    for (size_type i = 0; i < this->_size; i++) {
-        this->_allocator.destroy(this->_base_array + i);
-    }
-    if (!this->empty()) {
-        this->_allocator.deallocate(this->_base_array, this->_capacity);
-    }
+typename vector<value_type>::allocator_type
+vector<value_type>::get_allocator() const {
+    return this->_allocator;
 }
 
 // --------------------- Element Access ------------------------------ //
@@ -84,29 +110,53 @@ template<class value_type>
 vector<value_type> &vector<value_type>::operator=(const vector& copy) {
     if (this == &copy)
         return *this;
+    if (!this->empty()) {
+        for (size_type i = 0; i < this->_size; i++) {
+            this->_allocator.destroy(this->_base_array + i);
+        }
+        this->_allocator.deallocate(this->_base_array, this->_capacity);
+    }
     this->_size = copy.size();
-    this->capacity = copy.capacity();
-    this->_base_array = this->_allocator.allocate(this->_size);
+    if (copy.size() > this->_capacity) {
+        this->_capacity = copy.size();
+    }
+    this->_base_array = this->_allocator.allocate(this->_capacity);
     if (!this->_base_array) {
         throw std::bad_alloc();
     }
-    for (size_type i = 0; i < copy.size(); i++) {
-        this->_allocator.construct(this->_base_array + i, copy->_base_array + i);
+    for (size_type i = 0; i < this->_size; i++) {
+        this->_allocator.construct(this->_base_array + i, *(copy._base_array + i));
     }
     return *this;
+}
+
+template<class value_type>
+bool vector<value_type>::operator==(const vector& other) {
+    if (this == &other) {
+        return true;
+    }
+    if (this->_size != other.size()) {
+        return false;
+    }
+    for (size_type i = 0; i < this->_size; i++) {
+        if (*(this->_base_array + i) != *(other._base_array + i)) {
+            return false;
+        }
+    }
+    return true;
 }
 
 // --------------------- Capacity ------------------------------------ //
 
 template<class value_type>
 bool vector<value_type>::empty() const {
-	return _size > 0 ? true : false;
+	return !_size;
 }
 
 template<class value_type>
 typename vector<value_type>::size_type
 vector<value_type>::size() const {
-    return _size;
+    return this->_size;
 }
 
 template<class value_type>
@@ -118,12 +168,12 @@ vector<value_type>::max_size() const {
 template<class value_type>
 typename vector<value_type>::size_type
 vector<value_type>::capacity() const {
-    return _capacity;
+    return this->_capacity;
 }
 
 template<class value_type>
 void vector<value_type>::reserve(size_type new_cap) {
-    if (new_cap > _capacity) {
+    if (new_cap > this->_capacity) {
         pointer  _new_array = this->_allocator.allocate(new_cap);
         if (!_new_array) {
             throw std::bad_alloc();
