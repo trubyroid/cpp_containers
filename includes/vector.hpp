@@ -42,6 +42,13 @@ namespace ft
 
 			vector			&operator=(const vector& copy);
 			bool			operator==(const vector& other);
+			bool			operator!=(const vector& other);
+			bool			operator<(const vector& other);
+			bool			operator>(const vector& other);
+			bool			operator<=(const vector& other);
+			bool			operator>=(const vector& other);
+			// reference		operator[](size_type pos);
+			// const_reference	operator[](size_type pos) const;
 
 // --------------------- Iterators ---------------------------- //
 

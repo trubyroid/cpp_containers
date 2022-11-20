@@ -146,6 +146,47 @@ bool vector<value_type>::operator==(const vector& other) {
     return true;
 }
 
+template<class value_type>
+bool vector<value_type>::operator!=(const vector& other) {
+    return (!this->operator==(other));
+	}
+
+template<class value_type>
+bool vector<value_type>::operator<(const vector& other) {
+    for (size_type i = 0; i < other.size(); ++i) {
+        if (this->_base_array[i] > other._base_array[i])
+            return false;
+        // if (i == other.size() || this->_base_array[i] > other.at(i)) {
+        if (i == this->_size || this->_base_array[i] < other._base_array[i]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+template<class value_type>
+bool vector<value_type>::operator>(const vector& other) {
+    for (size_type i = 0; i < this->_size; ++i) {
+        if (this->_base_array[i] < other._base_array[i])
+            return false;
+        // if (i == other.size() || this->_base_array[i] > other.at(i)) {
+        if (i == other.size() || this->_base_array[i] > other._base_array[i]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+template<class value_type>
+bool vector<value_type>::operator<=(const vector& other) {
+    return !this->operator>(other);
+}
+
+template<class value_type>
+bool vector<value_type>::operator>=(const vector& other) {
+    return !this->operator<(other);
+}
+
 // --------------------- Capacity ------------------------------------ //
 
 template<class value_type>
