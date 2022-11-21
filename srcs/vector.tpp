@@ -104,6 +104,58 @@ vector<value_type>::get_allocator() const {
 
 // --------------------- Element Access ------------------------------ //
 
+template<class value_type>
+typename vector<value_type>::reference
+vector<value_type>::at(size_type pos) {
+	if (pos >= this->_size) {
+		throw std::out_of_range("vector");
+	}
+	return this->_base_array[pos];
+}
+
+template<class value_type>
+typename vector<value_type>::reference
+vector<value_type>::front() {
+    return this->at(0);
+}
+
+template<class value_type>
+typename vector<value_type>::reference
+vector<value_type>::back() {
+    return this->at(this->_size - 1);
+}
+
+template<class value_type>
+value_type* vector<value_type>::data() {
+    return this->_base_array;
+}
+
+template<class value_type>
+typename vector<value_type>::const_reference
+vector<value_type>::at(size_type pos) const {
+	if (pos >= this->_size) {
+		throw std::out_of_range("vector");
+	}
+	return this->_base_array[pos];
+}
+
+template<class value_type>
+typename vector<value_type>::const_reference
+vector<value_type>::front() const {
+    return this->at(0);
+}
+
+template<class value_type>
+typename vector<value_type>::const_reference
+vector<value_type>::back() const {
+    return this->at(this->_size - 1);
+}
+
+template<class value_type>
+const value_type*  vector<value_type>::data() const {
+    return this->_base_array;
+}
+
 // --------------------- Operators ----------------------------------- //
 
 template<class value_type>
@@ -187,6 +239,18 @@ bool vector<value_type>::operator>=(const vector& other) {
     return !this->operator<(other);
 }
 
+template<class value_type>
+typename vector<value_type>::reference
+vector<value_type>::operator[](size_type pos) {
+	return *(this->_base_array + pos);
+}
+
+template<class value_type>
+typename vector<value_type>::const_reference
+vector<value_type>::operator[](size_type pos) const {
+	return *(this->_base_array + pos);
+}
+
 // --------------------- Capacity ------------------------------------ //
 
 template<class value_type>
@@ -207,12 +271,6 @@ vector<value_type>::max_size() const {
 }
 
 template<class value_type>
-typename vector<value_type>::size_type
-vector<value_type>::capacity() const {
-    return this->_capacity;
-}
-
-template<class value_type>
 void vector<value_type>::reserve(size_type new_cap) {
     if (new_cap > this->_capacity) {
         pointer  _new_array = this->_allocator.allocate(new_cap);
@@ -229,7 +287,21 @@ void vector<value_type>::reserve(size_type new_cap) {
     }
 }
 
+template<class value_type>
+typename vector<value_type>::size_type
+vector<value_type>::capacity() const {
+    return this->_capacity;
+}
+
 // --------------------- Modifiers ----------------------------------- //
+
+template<class value_type>
+void vector<value_type>::clear() {
+    for (size_type i = 0; i < this->_size; i++)
+        this->_allocator.destroy(this->_base_array + i);
+    }
+    this->_size = 0;
+}
 
 template<class value_type>
 void vector<value_type>::resize(size_type count, const value_type& val) {
