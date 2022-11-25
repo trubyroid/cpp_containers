@@ -378,4 +378,21 @@ void vector<value_type>::resize(size_type count, const value_type& val) {
 	}
 }
 
+template<class value_type>
+void vector<value_type>::swap(vector& other) {
+    size_type   size = this->_size;
+    size_type   cap = this->_capacity;
+    value_type  *arr = this->_base_array;
+    allocator_type  alloc = this->_allocator;
+
+    this->_size = other.size();
+    this->_capacity = other.capacity();
+    this->_base_array = other.data();
+    this->_allocator = other.get_allocator();
+    
+    other._size = size;
+    other._capacity = cap;
+    other._base_array = arr;
+    other._allocator = alloc;
+}
 }

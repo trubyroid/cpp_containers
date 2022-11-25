@@ -85,8 +85,6 @@ namespace ft
 			size_type												capacity() const;
 
 // --------------------- Modifiers ---------------------------- //
-			
-			void													clear();
 
 			// iterator insert(const_iterator pos, const value_type& val);
 			// void insert(const_iterator pos, size_type count, const value_type& value );
@@ -94,15 +92,18 @@ namespace ft
 			// 	void insert(iterator position, InputIterator first, InputIterator last,
 			// 		typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
 					
-			void				push_back(const value_type &val);
-			void				pop_back();
-			void				resize(size_type cout, const value_type& val);
-
-
-
+			void													clear();
+			void													push_back(const value_type &val);
+			void													pop_back();
+			void													resize(size_type cout, const value_type& val);
+			void													swap(vector& other);
     };
 
 // --------------------- Non-member functions ----------------- //
+template <class T>
+void swap(vector<T>& x, vector<T>& y) {
+	x.swap(y);
+}
 
 }
 
