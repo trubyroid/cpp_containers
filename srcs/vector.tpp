@@ -251,6 +251,13 @@ vector<value_type>::operator[](size_type pos) const {
 	return *(this->_base_array + pos);
 }
 
+// --------------------- Iterators ----------------------------------- //
+
+//begin
+//end
+//rbegin
+//rend
+
 // --------------------- Capacity ------------------------------------ //
 
 template<class value_type>
@@ -297,10 +304,47 @@ vector<value_type>::capacity() const {
 
 template<class value_type>
 void vector<value_type>::clear() {
-    for (size_type i = 0; i < this->_size; i++)
+    for (size_type i = 0; i < this->_size; i++) {
         this->_allocator.destroy(this->_base_array + i);
     }
     this->_size = 0;
+}
+
+// template<class value_type>
+// typename vector<value_type>::iterator
+// vector<value_type>::insert(const_iterator pos, const value_type& value) {
+
+// }
+
+// template<class value_type>
+// void vector<value_type>::insert(const_iterator pos, size_type count, const value_type& value) {
+
+// }
+
+// template<class value_type>
+// template<class InputIterator>
+// void vector<value_type>::insert(iterator pos, InputIterator first, InputIterator last,
+// 	typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type*) {
+
+// }
+
+template<class value_type>
+void    vector<value_type>::push_back(const value_type &val) {
+    if (!this->_capacity)
+		this->_base_array = _allocator.allocate(this->_capacity = 1);
+    if (this->_size == this->_capacity) {
+        reserve(this->_capacity * 2);
+    }
+    this->_allocator.construct(this->_base_array + this->_size, val);
+    this->_size++;
+}
+
+template<class value_type>
+void    vector<value_type>::pop_back() {
+    if (this->_size) {
+        this->_allocator.destroy(this->_base_array + this->_size);
+        this->_size--;
+    }
 }
 
 template<class value_type>
@@ -335,25 +379,3 @@ void vector<value_type>::resize(size_type count, const value_type& val) {
 }
 
 }
-
-// template<class value_type>
-// void    vector<value_type>::doublingCapacity() {
-//     _capacity = (!_capacity) ? (1) : _capacity * 2;
-//     value_type *_new_array = _allocator.allocate(_capacity);
-//     for (size_type i = 0; i < _size; i++) {
-//         _allocator.allocate(_new_array + i, _base_array + i);
-//         _allocator.destroy(_base_array + i);
-//     }
-//     if (_capacity > 1)
-//         _allocator.deallocate(_base_array, _capacity / 2);
-//     _base_array = _new_array;
-// }
-
-// void    ft::vector::push_back(const value_type &val) {
-//     if (_size == _capacity) {
-//         doublingCapacity();
-//     }
-//     _allocator.construct(_base_array + _size++, val);
-// }
-
-// }

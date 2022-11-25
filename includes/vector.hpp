@@ -65,6 +65,17 @@ namespace ft
 
 // --------------------- Iterators ---------------------------- //
 
+			// iterator												begin();
+			// iterator												end();
+			// reverse_iterator										rbegin();
+			// reverse_iterator										rend();
+
+
+			// const_iterator											begin() const;
+			// const_iterator											end() const;
+			// const_reverse_iterator									rbegin() const;
+			// const_reverse_iterator									rend() const;
+
 // --------------------- Capacity ----------------------------- //
 
 			bool													empty() const;
@@ -77,13 +88,14 @@ namespace ft
 			
 			void													clear();
 
-			iterator insert(iterator position, const_reference x);
-			void insert(iterator position, size_type n, const_reference x);
-			template <class InputIterator>
-				void insert(iterator position, InputIterator first, InputIterator last,
-					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
+			// iterator insert(const_iterator pos, const value_type& val);
+			// void insert(const_iterator pos, size_type count, const value_type& value );
+			// template <class InputIterator>
+			// 	void insert(iterator position, InputIterator first, InputIterator last,
+			// 		typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
 					
-			// void			push_back(const value_type &val);
+			void				push_back(const value_type &val);
+			void				pop_back();
 			void				resize(size_type cout, const value_type& val);
 
 
