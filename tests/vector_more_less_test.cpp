@@ -2,7 +2,7 @@
 
 // #include <iostream>
 // #include <vector>
-// #include "../includes/vector.hpp"
+// #include "../../includes/vector/vector.hpp"
 
 // int main() {
 //     std::vector<int>                 vec(2,5);
@@ -36,7 +36,7 @@
 
 // #include <iostream>
 // #include <vector>
-// #include "../includes/vector.hpp"
+// #include "../../includes/vector/vector.hpp"
 
 // int main() {
 //     std::vector<int>                 vec(2,5);
@@ -70,7 +70,7 @@
 
 // #include <iostream>
 // #include <vector>
-// #include "../includes/vector.hpp"
+// #include "../../includes/vector/vector.hpp"
 
 // int main() {
 //     std::vector<int>                 vec(2,5);
@@ -103,7 +103,7 @@
 //------------------------------ >= ----------------------------------------//
 // #include <iostream>
 // #include <vector>
-// #include "../includes/vector.hpp"
+// #include "../../includes/vector/vector.hpp"
 
 // int main() {
 //     std::vector<int>                 vec(2,5);

@@ -107,6 +107,6 @@ void swap(vector<T>& x, vector<T>& y) {
 
 }
 
-# include "../srcs/vector.tpp"
+# include "../../srcs/vector/vector.tpp"
 
 #endif

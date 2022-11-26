@@ -52,7 +52,7 @@
     // }
 // }
 
-// #include "../includes/vector.hpp"
+// #include "../../includes/vector/vector.hpp"
 // using namespace std;
 
 // int main() {
@@ -160,7 +160,7 @@
 //     cout << endl << endl;
 // }
 
-// #include "../includes/vector.hpp"
+// #include "../../includes/vector/vector.hpp"
 // using namespace std;
 
 // int main() {
@@ -280,7 +280,7 @@
 //     }
 // }
 
-// #include "../includes/vector.hpp"
+// #include "../../includes/vector/vector.hpp"
 // using namespace std;
 
 // int main() {
