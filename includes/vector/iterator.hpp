@@ -2,26 +2,26 @@
 # define ITERATOR_HPP
 
 # include <iostream>
+// # include <cstddef>
 
 namespace ft
 {
-    template	<class T,
-			class Category = std::random_access_iterator_tag,
-			class Distance = ptrdiff_t,
-			class Pointer = T*,
-			class Reference = T&>
+    template	<class T>
+			// class Category = std::random_access_iterator_tag,
+			// class Distance = ptrdiff_t,
+			// class Pointer = T*,
+			// class Reference = T&>
     class myIterator {
+        public:
+            typedef T         value_type;
+            // typedef Category  iterator_category;
+            // typedef Distance  difference_type;
+            // typedef Pointer   pointer;
+            // typedef Reference reference;
         protected:
             T *_base_pointer;
         public:
-            typedef T         value_type;
-            typedef Category  iterator_category;
-            typedef Distance  difference_type;
-            typedef Pointer   pointer;
-            typedef Reference reference;
-
             // --------------------- Construct/Copy/Destruct --------------------- //
-
             myIterator();
             myIterator(T *val);
             myIterator(const myIterator& copy);
@@ -50,7 +50,9 @@ namespace ft
             virtual T& operator[] (int x);
     };
 
-    # include "../../srcs/vector/iterator.tpp"
 
-    #endif
 }
+
+# include "../../srcs/vector/iterator.tpp"
+
+#endif

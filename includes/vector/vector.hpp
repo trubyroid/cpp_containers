@@ -6,6 +6,10 @@
 # include <stdexcept>
 # include <limits>
 
+# include "iterator.hpp"
+# include "reverse_iterator.hpp"
+// # include "../utils/utils.hpp"
+
 namespace ft
 {
     template <class T>
@@ -19,6 +23,11 @@ namespace ft
 	        typedef typename	allocator_type::const_reference		const_reference;
 	        typedef typename	allocator_type::pointer				pointer;
 	        typedef typename	allocator_type::const_pointer		const_pointer;
+
+			typedef myIterator<T>									iterator;
+			typedef myIterator<const T>								const_iterator;
+			typedef myReverseIterator<T>							reverse_iterator;
+			typedef myReverseIterator<const T>						const_reverse_iterator;
         private:
             size_type												_size;
 	        size_type												_capacity;
@@ -65,16 +74,16 @@ namespace ft
 
 // --------------------- Iterators ---------------------------- //
 
-			// iterator												begin();
-			// iterator												end();
-			// reverse_iterator										rbegin();
-			// reverse_iterator										rend();
+			iterator												begin();
+			iterator												end();
+			reverse_iterator										rbegin();
+			reverse_iterator										rend();
 
 
-			// const_iterator											begin() const;
-			// const_iterator											end() const;
-			// const_reverse_iterator									rbegin() const;
-			// const_reverse_iterator									rend() const;
+			const_iterator											begin() const;
+			const_iterator											end() const;
+			const_reverse_iterator									rbegin() const;
+			const_reverse_iterator									rend() const;
 
 // --------------------- Capacity ----------------------------- //
 
@@ -104,6 +113,7 @@ template <class T>
 void swap(vector<T>& x, vector<T>& y) {
 	x.swap(y);
 }
+
 
 }
 

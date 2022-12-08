@@ -253,10 +253,55 @@ vector<value_type>::operator[](size_type pos) const {
 
 // --------------------- Iterators ----------------------------------- //
 
-//begin
-//end
-//rbegin
-//rend
+template<class value_type>
+typename vector<value_type>::iterator
+vector<value_type>::begin() {
+	return iterator(this->_base_array);
+}
+
+template<class value_type>
+typename vector<value_type>::iterator
+vector<value_type>::end() {
+	return iterator(this->_base_array + this->_size);
+}
+
+template<class value_type>
+typename vector<value_type>::reverse_iterator
+vector<value_type>::rbegin() {
+	return reverse_iterator(this->_base_array + this->_size);
+}
+
+template<class value_type>
+typename vector<value_type>::reverse_iterator
+vector<value_type>::rend() {
+	return reverse_iterator(this->_base_array);
+}
+
+// --------------------- Iterators const ----------------------------- //
+
+template<class value_type>
+typename vector<value_type>::const_iterator
+vector<value_type>::begin() const{
+	return const_iterator(this->_base_array);
+}
+
+template<class value_type>
+typename vector<value_type>::const_iterator
+vector<value_type>::end() const{
+	return const_iterator(this->_base_array + this->_size);
+}
+
+template<class value_type>
+typename vector<value_type>::const_reverse_iterator
+vector<value_type>::rbegin() const {
+	return const_reverse_iterator(this->_base_array + this->_size);
+}
+
+template<class value_type>
+typename vector<value_type>::const_reverse_iterator
+vector<value_type>::rend() const {
+	return reverse_iterator(this->_base_array);
+}
 
 // --------------------- Capacity ------------------------------------ //
 
