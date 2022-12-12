@@ -101,7 +101,7 @@ namespace ft
 			// 	void insert(iterator position, InputIterator first, InputIterator last,
 			// 		typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
 					
-			// iterator												erase(iterator pos);
+			iterator												erase(iterator pos);
 			// iterator												erase(iterator first, iterator last);
 			void													clear();
 			void													push_back(const value_type &val);

@@ -222,7 +222,33 @@ int main() {
 
     // std::cout << std::endl << std::endl << "~~~~~~~~ INSERT TEST." << std::endl << std::endl; {}
 
-    // std::cout << std::endl << std::endl << "~~~~~~~~ ERASE TEST." << std::endl << std::endl; {}
+    std::cout << std::endl << std::endl << "~~~~~~~~ ERASE TEST." << std::endl << std::endl;
+    {
+        ft::vector<int> vec(1,5);
+
+        vec.resize(2,4);
+        vec.resize(3,3);
+        std::cout << "VECTOR: ";
+        for (int i = 0; i < vec.size(); i++) {
+            std::cout << vec.at(i);
+        }
+        std::cout << std::endl;
+
+        ft::vector<int>::iterator   it = vec.begin();
+        it++;
+
+        vec.erase(it);
+        std::cout << "VECTOR AFTER ERASE: ";
+        for (int i = 0; i < vec.size(); i++) {
+            std::cout << vec.at(i);
+        }
+        std::cout << std::endl;
+    }
+
+    // std::cout << std::endl << std::endl << "~~~~~~~~ ERASE INTERVAL TEST." << std::endl << std::endl;
+    // {
+
+    // }
 
     std::cout << std::endl << std::endl << "~~~~~~~~ PUSH POP BACK TEST." << std::endl << std::endl;
     {
@@ -259,7 +285,7 @@ int main() {
         }
     }
 
-    std::cout << std::endl << std::endl << "~~~~~~~~ RESIZE TEST." << std::endl << std::endl;
+    std::cout << std::endl << std::endl << "~~~~~~~~ RESIZE TESTS." << std::endl << std::endl;
     {
         ft::vector<int> vec(3, 5);
 
@@ -332,7 +358,7 @@ int main() {
         std::cout << std::endl;
     }
 
-    std::cout << std::endl << std::endl << "~~~~~~~~ EQUAL TEST." << std::endl << std::endl;
+    std::cout << std::endl << std::endl << "~~~~~~~~ EQUAL TESTS." << std::endl << std::endl;
     {
         ft::vector<int>                 vec(3,5);
         ft::vector<int>                 vec_1(3,5);
@@ -378,7 +404,7 @@ int main() {
 
     }
 
-    std::cout << std::endl << std::endl << "~~~~~~~~ NOT EQUAL TEST." << std::endl << std::endl;
+    std::cout << std::endl << std::endl << "~~~~~~~~ NOT EQUAL TESTS." << std::endl << std::endl;
     {
         ft::vector<int>                 vec(3,5);
         ft::vector<int>                 vec_1(3,5);
@@ -424,7 +450,7 @@ int main() {
 
     }
 
-    std::cout << std::endl << std::endl << "~~~~~~~~ APPROPRIATION TEST." << std::endl << std::endl;
+    std::cout << std::endl << std::endl << "~~~~~~~~ APPROPRIATION TESTS." << std::endl << std::endl;
     {
         ft::vector<int>                 vec(3,5);
         ft::vector<int>                 vec_1(vec);
@@ -473,4 +499,48 @@ int main() {
             std::cout << "Not equal" << std::endl;
         }
     }
+
+    std::cout << std::endl << std::endl << "~~~~~~~~ MORE/LESS/EQUAL TESTS." << std::endl << std::endl;
+    {
+        ft::vector<int>             vec(2,5);
+        ft::vector<int>             vec_1(3,5);
+
+        vec.resize(3,4);
+        std::cout << std::endl << "LESS TEST: ";
+        if (vec < vec_1) {
+            std::cout << "DONE" << std::endl;
+        }
+        else {
+            std::cout << "ERROR" << std::endl;
+        }
+
+        std::cout << std::endl << "LESS OR EQUAL TEST: ";
+        if (vec <= vec_1) {
+            std::cout << "DONE" << std::endl;
+        }
+        else {
+            std::cout << "ERROR" << std::endl;
+        }
+
+        std::cout << std::endl << "MORE TEST: ";
+        if (vec > vec_1) {
+            std::cout << "ERROR" << std::endl;
+        }
+        else {
+            std::cout << "DONE" << std::endl;
+        }
+
+        std::cout << std::endl << "MORE OR EQUAL TEST: ";
+        if (vec >= vec_1) {
+            std::cout << "ERROR" << std::endl;
+        }
+        else {
+            std::cout << "DONE" << std::endl;
+        }
+    }
 }
+
+
+
+
+// выводим версию с дефолтным и моим векторами в два разных файла, после чего сравниваем их с помощью FC

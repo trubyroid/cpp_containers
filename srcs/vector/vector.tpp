@@ -373,7 +373,29 @@ void vector<value_type>::clear() {
 
 // }
 
+template<class value_type>
+typename vector<value_type>::iterator
+vector<value_type>::erase(iterator pos) {
+    size_type ind = 0;
+    iterator    pos_iter = pos;
+    while (pos_iter != this->_base_array) {
+        pos_iter--;
+        ind++;
+    }
+    this->_allocator.destroy(this->_base_array + ind);
+    for (; ind < this->_size; ind++) {
+        this->_allocator.construct(this->_base_array + ind, *(this->_base_array + ind + 1));
+        this->_allocator.destroy(this->_base_array + ind + 1);
+    }
+    this->_size--;
+    return(pos);
+}
 
+// template<class value_type>
+// typename vector<value_type>::iterator
+// vector<value_type>::erase(iterator first, iterator last) {
+
+// }
 
 template<class value_type>
 void    vector<value_type>::push_back(const value_type &val) {
