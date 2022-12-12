@@ -373,6 +373,8 @@ void vector<value_type>::clear() {
 
 // }
 
+
+
 template<class value_type>
 void    vector<value_type>::push_back(const value_type &val) {
     if (!this->_capacity)
