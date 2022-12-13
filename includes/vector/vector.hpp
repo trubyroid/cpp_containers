@@ -96,7 +96,7 @@ namespace ft
 
 // --------------------- Modifiers ---------------------------- //
 
-			// iterator insert(const_iterator pos, const value_type& val);
+			iterator 												insert(iterator pos, const value_type& val);
 			// void insert(const_iterator pos, size_type count, const value_type& value );
 			// template <class InputIterator>
 			// 	void insert(iterator position, InputIterator first, InputIterator last,

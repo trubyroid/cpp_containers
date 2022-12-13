@@ -316,11 +316,16 @@ vector<value_type>::size() const {
     return this->_size;
 }
 
+#define STRING_MAX_SIZE 768614336404564650
+
 template<class value_type>
 typename vector<value_type>::size_type
 vector<value_type>::max_size() const {\
     size_type val = (pow(2, 64) / sizeof(value_type));
 	val--;
+    if (val == 768614336404564607) {                            //костыль для std::string
+        val = STRING_MAX_SIZE;
+    }
 	return val;
 }
 
@@ -357,11 +362,37 @@ void vector<value_type>::clear() {
     this->_size = 0;
 }
 
-// template<class value_type>
-// typename vector<value_type>::iterator
-// vector<value_type>::insert(const_iterator pos, const value_type& value) {
+template<class value_type>
+typename vector<value_type>::iterator
+vector<value_type>::insert(iterator pos, const value_type& value) {
+    size_type ind = 0;
+    iterator    pos_iter = pos;
+    value_type  *_new_array;
 
-// }
+    if (this->_size == this->_capacity) {
+        this->reserve(this->_capacity * 2);
+    }
+    while (pos_iter != this->_base_array) {
+        pos_iter--;
+        ind++;
+    }
+    _new_array = this->_allocator.allocate(this->_capacity);
+    for (int i = 0; i <= this->_size; i++) {
+        if (i + 1 == ind) {
+            this->_allocator.construct(_new_array + i, value);
+        }
+        else {
+            this->_allocator.construct(_new_array + i, this->_base_array + i);
+        }
+    }
+    for (int i = 0; i < this->_size; i++) {
+        this->_allocator.destroy(this->_base_array + i);
+    }
+    this->_allocator.deallocate(this->_base_array, this->_capacity);
+    this->_base_array = _new_array;
+    this->_size++;
+    return (pos);
+}
 
 // template<class value_type>
 // void vector<value_type>::insert(const_iterator pos, size_type count, const value_type& value) {
