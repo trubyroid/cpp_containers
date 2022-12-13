@@ -5,6 +5,7 @@
 # include <memory>
 # include <stdexcept>
 # include <limits>
+# include <cmath>
 
 # include "iterator.hpp"
 # include "reverse_iterator.hpp"
@@ -102,7 +103,7 @@ namespace ft
 			// 		typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
 					
 			iterator												erase(iterator pos);
-			// iterator												erase(iterator first, iterator last);
+			iterator												erase(iterator first, iterator last);
 			void													clear();
 			void													push_back(const value_type &val);
 			void													pop_back();
@@ -111,11 +112,10 @@ namespace ft
     };
 
 // --------------------- Non-member functions ----------------- //
-template <class T>
-void swap(vector<T>& x, vector<T>& y) {
-	x.swap(y);
-}
-
+	template <class T>
+	void swap(vector<T>& x, vector<T>& y) {
+		x.swap(y);
+	}
 
 }
 

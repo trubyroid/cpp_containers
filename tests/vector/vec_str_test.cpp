@@ -12,13 +12,13 @@ int main() {
     std::cout << "~~~~~~~~ CONSTRUCTORS TEST." << std::endl << std::endl;
 
     {
-        ft::vector<int>             vec;
-        ft::vector<int>             vec_1(3, 5);
-        ft::vector<int>             vec_2(vec_1);
+        ft::vector<std::string>             vec;
+        ft::vector<std::string>             vec_1(3, "test");
+        ft::vector<std::string>             vec_2(vec_1);
 
-        // ft::vector<int>::iterator   beg = vec_2.begin();
-        // ft::vector<int>::iterator   end = vec_2.end();
-        // ft::vector<int>             vec_3(beg, end);
+        // ft::vector<std::string>::iterator   beg = vec_2.begin();
+        // ft::vector<std::string>::iterator   end = vec_2.end();
+        // ft::vector<std::string>             vec_3(beg, end);
         
 
         std::cout << "VEC: " << vec.size() << ", " << vec.capacity() << ", " << std::endl;
@@ -47,9 +47,9 @@ int main() {
 
     std::cout << std::endl << std::endl << "~~~~~~~~ ASSIGN TEST." << std::endl << std::endl;
     {
-        ft::vector<int>             vec(3, 5);
+        ft::vector<std::string>             vec(3, "la");
 
-        vec.assign(4,6);
+        vec.assign(4,"ta");
         for (int i = 0; i < vec.size(); i++) {
             std::cout << vec.at(i);
         }
@@ -58,7 +58,7 @@ int main() {
         std::cout << "Capacity: " << vec.capacity() << std::endl;
         std::cout << std::endl;
 
-        vec.assign(4,8);
+        vec.assign(4,"fa");
         for (int i = 0; i < vec.size(); i++) {
             std::cout << vec.at(i);
         }
@@ -67,7 +67,7 @@ int main() {
         std::cout << "Capacity: " << vec.capacity() << std::endl;
         std::cout << std::endl;
 
-        vec.assign(2,9);
+        vec.assign(2,"da");
         for (int i = 0; i < vec.size(); i++) {
             std::cout << vec.at(i);
         }
@@ -78,11 +78,11 @@ int main() {
 
     // std::cout << std::endl << std::endl << "~~~~~~~~ ASSIGN ITERATOR TEST." << std::endl << std::endl;
     // {
-    //     ft::vector<int>                 vec(3, 9);
-    //     ft::vector<int>                 vec_1(5, 8);
-    //     ft::vector<int>::iterator       begin = vec.begin();
-    //     ft::vector<int>::iterator       end = vec.end();
-    //     int                             *p;
+    //     ft::vector<std::string>                 vec(3, "test ");
+    //     ft::vector<std::string>                 vec_1(5, "tset ");
+    //     ft::vector<std::string>::iterator       begin = vec.begin();
+    //     ft::vector<std::string>::iterator       end = vec.end();
+    //     std::string                             *p;
 
     //     p = vec.data();
     //     std::cout << "VEC: ";
@@ -111,7 +111,7 @@ int main() {
 
     std::cout << std::endl << std::endl << "~~~~~~~~ AT TEST." << std::endl << std::endl;
     {
-        ft::vector<int> vec(3,5);
+        ft::vector<std::string> vec(3,"test ");
 
         std::cout << "VEC.AT(2): " << vec.at(2) << std::endl;
         std::cout << "VEC[1]: " << vec[1] << std::endl;
@@ -119,12 +119,12 @@ int main() {
 
     std::cout << std::endl << std::endl << "~~~~~~~~ FRONT AND BACK TEST." << std::endl << std::endl;
     {
-        ft::vector<int> vec(3,5);
+        ft::vector<std::string> vec(3,"test ");
 
         std::cout << "BEFORE RESIZE. FRONT:" << vec.front() << ", BACK:";
         std::cout << vec.back() << std::endl;
 
-        vec.resize(4,8);
+        vec.resize(4,"ta ");
 
         std::cout << "AFTER RESIZE. FRONT:" << vec.front() << ", BACK:";
         std::cout << vec.back() << std::endl;
@@ -132,14 +132,14 @@ int main() {
 
     std::cout << std::endl << std::endl << "~~~~~~~~ ITERATORS TEST." << std::endl << std::endl; 
     {
-        ft::vector<int>                 vec(1,5);
+        ft::vector<std::string>                 vec(1,"ta ");
 
-        vec.resize(2,6);
-        vec.resize(3,7);
-        vec.resize(4,8);
+        vec.resize(2,"ta ");
+        vec.resize(3,"ra ");
+        vec.resize(4,"fa ");
 
-        ft::vector<int>::iterator       begin = vec.begin();
-        ft::vector<int>::iterator       end = vec.end();
+        ft::vector<std::string>::iterator       begin = vec.begin();
+        ft::vector<std::string>::iterator       end = vec.end();
 
         std::cout << "ITERATOR: ";
         while (begin != end) {
@@ -149,8 +149,8 @@ int main() {
 
         std::cout << std::endl;
 
-        ft::vector<int>::reverse_iterator       rbegin = vec.rbegin();
-        ft::vector<int>::reverse_iterator       rend = vec.rend();
+        ft::vector<std::string>::reverse_iterator       rbegin = vec.rbegin();
+        ft::vector<std::string>::reverse_iterator       rend = vec.rend();
 
         std::cout << "REVERSE ITERATOR: ";
         while (rbegin != rend) {
@@ -161,7 +161,7 @@ int main() {
 
     std::cout << std::endl << std::endl << "~~~~~~~~ EMPTY MAX_SIZE SIZE CAPACITY TEST." << std::endl << std::endl;
     {
-        ft::vector<int> vec(3,5);
+        ft::vector<std::string> vec(3,"test ");
 
         std::cout << "EMPTY: " << vec.empty() << std::endl;    
         std::cout << "MAX_SIZE: " << vec.max_size() << std::endl;
@@ -171,7 +171,7 @@ int main() {
 
     std::cout << std::endl << std::endl << "~~~~~~~~ RESERVE TEST." << std::endl << std::endl;
     {
-        ft::vector<int> vec(3,5);
+        ft::vector<std::string> vec(3,"test ");
 
         std::cout << "BEFORE RESERVE." << std::endl;
         std::cout << "SIZE: " << vec.size() << std::endl;
@@ -196,7 +196,7 @@ int main() {
 
     std::cout << std::endl << std::endl << "~~~~~~~~ CLEAR TEST." << std::endl << std::endl;
     {
-        ft::vector<int> vec(3,5);
+        ft::vector<std::string> vec(3,"test ");
 
         std::cout << "BEFORE CLEAR." << std::endl;
         std::cout << "SIZE: " << vec.size() << std::endl;
@@ -218,22 +218,22 @@ int main() {
         }
     }
 
-    // std::cout << std::endl << std::endl << "~~~~~~~~ INSERT TEST." << std::endl << std::endl; {}
+    // // std::cout << std::endl << std::endl << "~~~~~~~~ INSERT TEST." << std::endl << std::endl; {}
 
     std::cout << std::endl << std::endl << "~~~~~~~~ ERASE TEST." << std::endl << std::endl;
     {
-        ft::vector<int> vec(1,5);
+        ft::vector<std::string> vec(1,"fa ");
 
-        vec.resize(2,4);
-        vec.resize(3,3);
+        vec.resize(2,"ta ");
+        vec.resize(3,"ra ");
         std::cout << "VECTOR BEFORE ERASE: ";
         for (int i = 0; i < vec.size(); i++) {
             std::cout << vec.at(i);
         }
         std::cout << std::endl;
 
-        ft::vector<int>::iterator   it = vec.begin();
-        ft::vector<int>::iterator   return_vl;
+        ft::vector<std::string>::iterator   it = vec.begin();
+        ft::vector<std::string>::iterator   return_vl;
         it++;
 
         return_vl = vec.erase(it);
@@ -247,12 +247,12 @@ int main() {
 
     std::cout << std::endl << std::endl << "~~~~~~~~ ERASE INTERVAL TEST." << std::endl << std::endl;
     {
-        ft::vector<int> vec(1,5);
+        ft::vector<std::string> vec(1,"ta ");
 
-        vec.resize(2,4);
-        vec.resize(3,3);
-        vec.resize(4,2);
-        vec.resize(5,1);
+        vec.resize(2,"ra ");
+        vec.resize(3,"wa ");
+        vec.resize(4,"fa ");
+        vec.resize(5,"sa ");
         std::cout << "VECTOR BEFORE ERASE: ";
         for (int i = 0; i < vec.size(); i++) {
             std::cout << vec.at(i);
@@ -261,9 +261,9 @@ int main() {
         std::cout << std::endl << "CAPACITY: " << vec.capacity() << std::endl;
         std::cout << std::endl;
 
-        ft::vector<int>::iterator   it_beg = vec.begin();
-        ft::vector<int>::iterator   it_end = vec.end();
-        ft::vector<int>::iterator   return_vl;
+        ft::vector<std::string>::iterator   it_beg = vec.begin();
+        ft::vector<std::string>::iterator   it_end = vec.end();
+        ft::vector<std::string>::iterator   return_vl;
         it_beg++;
         it_end--;
 
@@ -280,17 +280,17 @@ int main() {
 
     std::cout << std::endl << std::endl << "~~~~~~~~ PUSH POP BACK TEST." << std::endl << std::endl;
     {
-        ft::vector<int> vec;
+        ft::vector<std::string> vec;
 
-        vec.push_back(1);
-        vec.push_back(3);
-        vec.push_back(5);
-        vec.push_back(8);
-        vec.push_back(1);
-        vec.push_back(1);
-        vec.push_back(1);
-        vec.push_back(6);
-        vec.push_back(6);
+        vec.push_back("tra");
+        vec.push_back("ta");
+        vec.push_back("ta");
+        vec.push_back("ta");
+        vec.push_back("ta");
+        vec.push_back("ta");
+        vec.push_back("ta");
+        vec.push_back("ta");
+        vec.push_back("ta");
 
         std::cout << "BEFORE POP BACK";
         std::cout << std::endl << "SIZE: " << vec.size();
@@ -315,7 +315,7 @@ int main() {
 
     std::cout << std::endl << std::endl << "~~~~~~~~ RESIZE TESTS." << std::endl << std::endl;
     {
-        ft::vector<int> vec(3, 5);
+        ft::vector<std::string> vec(3, "la");
 
         std::cout << "VECTOR(3,5): ";
         for (int i = 0; i < vec.size(); i++) {
@@ -325,7 +325,7 @@ int main() {
         std::cout << std::endl << "CAPACITY: " << vec.capacity() << std::endl;
         std::cout << std::endl;
 
-        vec.resize(5,2);
+        vec.resize(5,"ya ");
         std::cout << "RESIZE(5,2): ";
         for (int i = 0; i < vec.size(); i++) {
             std::cout << vec.at(i);
@@ -334,7 +334,7 @@ int main() {
         std::cout << std::endl << "CAPACITY: " << vec.capacity() << std::endl;
         std::cout << std::endl;
 
-        vec.resize(10,3);
+        vec.resize(10,"ua ");
         std::cout << "RESIZE(10,3): ";
         for (int i = 0; i < vec.size(); i++) {
             std::cout << vec.at(i);
@@ -343,7 +343,7 @@ int main() {
         std::cout << std::endl << "CAPACITY: " << vec.capacity() << std::endl;
         std::cout << std::endl;
 
-        vec.resize(3,3);
+        vec.resize(3,"qa ");
         std::cout << "RESIZE(3,3): ";
         for (int i = 0; i < vec.size(); i++) {
             std::cout << vec.at(i);
@@ -354,8 +354,8 @@ int main() {
 
     std::cout << std::endl << std::endl << "~~~~~~~~ SWAP TEST." << std::endl << std::endl;
     {
-        ft::vector<int>    vec(3,7);
-        ft::vector<int>    vec_1(5,8);
+        ft::vector<std::string>    vec(3,"one ");
+        ft::vector<std::string>    vec_1(5,"two ");
 
         std::cout << "BEFORE SWAP." << std::endl;
         std::cout << "VEC: ";
@@ -388,11 +388,11 @@ int main() {
 
     std::cout << std::endl << std::endl << "~~~~~~~~ EQUAL TESTS." << std::endl << std::endl;
     {
-        ft::vector<int>                 vec(3,5);
-        ft::vector<int>                 vec_1(3,5);
-        ft::vector<int>                 vec_2(3,5);
+        ft::vector<std::string>                 vec(3,"test ");
+        ft::vector<std::string>                 vec_1(3,"test ");
+        ft::vector<std::string>                 vec_2(3,"test ");
 
-        std::cout << "vec(555) and vec_1(555): ";
+        std::cout << "vec and vec_1: ";
         if (vec == vec_1) {
             std::cout << "Equal" << std::endl;
         }
@@ -400,9 +400,9 @@ int main() {
             std::cout << "Not equal" << std::endl;
         }
 
-        vec.resize(5,6);
+        vec.resize(5,"one ");
 
-        std::cout << "vec(55566) and vec_1(555): ";
+        std::cout << "vec and vec_1: ";
         if (vec == vec_1) {
             std::cout << "Equal" << std::endl;
         }
@@ -410,9 +410,9 @@ int main() {
             std::cout << "Not equal" << std::endl;
         }
 
-        vec_1.resize(5,6);
+        vec_1.resize(5,"one ");
 
-        std::cout << "vec(55566) and vec_1(55566): ";
+        std::cout << "vec and vec_1: ";
         if (vec == vec_1) {
             std::cout << "Equal" << std::endl;
         }
@@ -422,7 +422,7 @@ int main() {
 
         vec_2.reserve(5);
 
-        std::cout << "vec_2(555__) and vec(55566): ";
+        std::cout << "vec_2 and vec: ";
         if (vec_2 == vec) {
             std::cout << "Equal" << std::endl;
         }
@@ -434,11 +434,11 @@ int main() {
 
     std::cout << std::endl << std::endl << "~~~~~~~~ NOT EQUAL TESTS." << std::endl << std::endl;
     {
-        ft::vector<int>                 vec(3,5);
-        ft::vector<int>                 vec_1(3,5);
-        ft::vector<int>                 vec_2(3,5);
+        ft::vector<std::string>                 vec(3,"test ");
+        ft::vector<std::string>                 vec_1(3,"test ");
+        ft::vector<std::string>                 vec_2(3,"test ");
 
-        std::cout << "vec(555) and vec_1(555): ";
+        std::cout << "vec and vec_1: ";
         if (vec != vec_1) {
             std::cout << "Not equal" << std::endl;
         }
@@ -446,9 +446,9 @@ int main() {
             std::cout << "Equal" << std::endl;
         }
 
-        vec.resize(5,6);
+        vec.resize(5,"one ");
 
-        std::cout << "vec(55566) and vec_1(555): ";
+        std::cout << "vec and vec_1: ";
         if (vec != vec_1) {
             std::cout << "Not equal" << std::endl;
         }
@@ -456,9 +456,9 @@ int main() {
             std::cout << "Equal" << std::endl;
         }
 
-        vec_1.resize(5,6);
+        vec_1.resize(5,"one ");
 
-        std::cout << "vec(55566) and vec_1(55566): ";
+        std::cout << "vec and vec_1: ";
         if (vec != vec_1) {
             std::cout << "Not equal" << std::endl;
         }
@@ -468,7 +468,7 @@ int main() {
 
         vec_2.reserve(5);
 
-        std::cout << "vec_2(555__) and vec(55566): ";
+        std::cout << "vec_2 and vec: ";
         if (vec_2 != vec) {
             std::cout << "Not equal" << std::endl;
         }
@@ -480,12 +480,12 @@ int main() {
 
     std::cout << std::endl << std::endl << "~~~~~~~~ APPROPRIATION TESTS." << std::endl << std::endl;
     {
-        ft::vector<int>                 vec(3,5);
-        ft::vector<int>                 vec_1(vec);
-        ft::vector<int>                 vec_2(2,5);
+        ft::vector<std::string>                 vec(3,"test ");
+        ft::vector<std::string>                 vec_1(vec);
+        ft::vector<std::string>                 vec_2(2,"tset ");
 
-        vec_1.resize(5,7);
-        std::cout << "vec(555) and vec_1(55577): ";
+        vec_1.resize(5,"one ");
+        std::cout << "vec and vec_1: ";
         if (vec != vec_1) {
             std::cout << "Not equal" << std::endl;
         }
@@ -507,7 +507,7 @@ int main() {
 
         std::cout << std::endl;
 
-        std::cout << "vec_2(55) and vec_1(555): ";
+        std::cout << "vec_2 and vec_1: ";
         if (vec_2 == vec_1) {
             std::cout << "Equal" << std::endl;
         }
@@ -530,45 +530,40 @@ int main() {
 
     std::cout << std::endl << std::endl << "~~~~~~~~ MORE/LESS/EQUAL TESTS." << std::endl << std::endl;
     {
-        ft::vector<int>             vec(2,5);
-        ft::vector<int>             vec_1(3,5);
+        ft::vector<std::string>             vec(2,"test");
+        ft::vector<std::string>             vec_1(3,"test");
 
-        vec.resize(3,4);
+        vec.resize(3,"tst");
         std::cout << std::endl << "LESS TEST: ";
         if (vec < vec_1) {
-            std::cout << "DONE" << std::endl;
+            std::cout << "ERROR" << std::endl;
         }
         else {
-            std::cout << "ERROR" << std::endl;
+            std::cout << "DONE" << std::endl;
         }
 
         std::cout << std::endl << "LESS OR EQUAL TEST: ";
         if (vec <= vec_1) {
-            std::cout << "DONE" << std::endl;
+            std::cout << "ERROR" << std::endl;
         }
         else {
-            std::cout << "ERROR" << std::endl;
+            std::cout << "DONE" << std::endl;
         }
 
         std::cout << std::endl << "MORE TEST: ";
         if (vec > vec_1) {
-            std::cout << "ERROR" << std::endl;
+            std::cout << "DONE" << std::endl;
         }
         else {
-            std::cout << "DONE" << std::endl;
+            std::cout << "ERROR" << std::endl;
         }
 
         std::cout << std::endl << "MORE OR EQUAL TEST: ";
         if (vec >= vec_1) {
-            std::cout << "ERROR" << std::endl;
+            std::cout << "DONE" << std::endl;
         }
         else {
-            std::cout << "DONE" << std::endl;
+            std::cout << "ERROR" << std::endl;
         }
     }
 }
-
-
-
-
-// выводим версию с дефолтным и моим векторами в два разных файла, после чего сравниваем их с помощью FC

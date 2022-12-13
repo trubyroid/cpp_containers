@@ -318,8 +318,10 @@ vector<value_type>::size() const {
 
 template<class value_type>
 typename vector<value_type>::size_type
-vector<value_type>::max_size() const {
-	return std::numeric_limits<value_type>::max();
+vector<value_type>::max_size() const {\
+    size_type val = (pow(2, 64) / sizeof(value_type));
+	val--;
+	return val;
 }
 
 template<class value_type>
@@ -391,11 +393,32 @@ vector<value_type>::erase(iterator pos) {
     return(pos);
 }
 
-// template<class value_type>
-// typename vector<value_type>::iterator
-// vector<value_type>::erase(iterator first, iterator last) {
-
-// }
+template<class value_type>
+typename vector<value_type>::iterator
+vector<value_type>::erase(iterator first, iterator last) {
+    size_type ind_beg = 0;
+    size_type ind_end = 0;
+    size_type interval;
+    iterator    pos_iter_beg = first;
+    iterator    pos_iter_end = last;
+    while (pos_iter_beg != this->_base_array) {
+        pos_iter_beg--;
+        ind_beg++;
+    }
+    while (pos_iter_end != this->_base_array) {
+        pos_iter_end--;
+        ind_end++;
+    }
+    interval = ind_end - ind_beg;
+    for (size_type i = ind_beg; i < ind_end; i++) {
+        this->_allocator.destroy(this->_base_array + i);
+    }
+    for (;ind_beg < ind_end && ind_end < this->_size; ind_beg++ && ind_end) {
+        this->_allocator.construct(this->_base_array + ind_beg, *(this->_base_array + ind_end));
+    }
+    this->_size = this->_size - interval;
+    return (first);
+}
 
 template<class value_type>
 void    vector<value_type>::push_back(const value_type &val) {
