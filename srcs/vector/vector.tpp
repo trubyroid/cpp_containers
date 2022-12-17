@@ -365,24 +365,25 @@ void vector<value_type>::clear() {
 template<class value_type>
 typename vector<value_type>::iterator
 vector<value_type>::insert(iterator pos, const value_type& value) {
-    size_type ind = 0;
-    iterator    pos_iter = pos;
     value_type  *_new_array;
+    size_type   ind = 0;
+    size_type   j = 0;
 
+    while (pos != this->begin()) {
+        pos--;
+        ind++;
+    }
     if (this->_size == this->_capacity) {
         this->reserve(this->_capacity * 2);
     }
-    while (pos_iter != this->_base_array) {
-        pos_iter--;
-        ind++;
-    }
     _new_array = this->_allocator.allocate(this->_capacity);
     for (int i = 0; i <= this->_size; i++) {
-        if (i + 1 == ind) {
-            this->_allocator.construct(_new_array + i, value);
+        if (i == ind) {
+            this->_allocator.construct(_new_array + ind, value);
         }
         else {
-            this->_allocator.construct(_new_array + i, this->_base_array + i);
+            this->_allocator.construct(_new_array + i, *(this->_base_array + j));
+            j++;
         }
     }
     for (int i = 0; i < this->_size; i++) {
@@ -391,7 +392,7 @@ vector<value_type>::insert(iterator pos, const value_type& value) {
     this->_allocator.deallocate(this->_base_array, this->_capacity);
     this->_base_array = _new_array;
     this->_size++;
-    return (pos);
+    return (iterator(this->_base_array + ind));
 }
 
 // template<class value_type>
@@ -409,9 +410,9 @@ vector<value_type>::insert(iterator pos, const value_type& value) {
 template<class value_type>
 typename vector<value_type>::iterator
 vector<value_type>::erase(iterator pos) {
-    size_type ind = 0;
+    size_type   ind = 0;
     iterator    pos_iter = pos;
-    while (pos_iter != this->_base_array) {
+    while (pos_iter != this->begin()) {
         pos_iter--;
         ind++;
     }
@@ -432,11 +433,11 @@ vector<value_type>::erase(iterator first, iterator last) {
     size_type interval;
     iterator    pos_iter_beg = first;
     iterator    pos_iter_end = last;
-    while (pos_iter_beg != this->_base_array) {
+    while (pos_iter_beg != this->begin()) {
         pos_iter_beg--;
         ind_beg++;
     }
-    while (pos_iter_end != this->_base_array) {
+    while (pos_iter_end != this->begin()) {
         pos_iter_end--;
         ind_end++;
     }
