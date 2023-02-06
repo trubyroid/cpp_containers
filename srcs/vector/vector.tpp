@@ -395,10 +395,46 @@ vector<value_type>::insert(iterator pos, const value_type& value) {
     return (iterator(this->_base_array + ind));
 }
 
-// template<class value_type>
-// void vector<value_type>::insert(const_iterator pos, size_type count, const value_type& value) {
+template<class value_type>
+typename vector<value_type>::iterator
+vector<value_type>::insert(iterator pos, size_type count, const value_type& value) {
+    value_type  *_new_array;
+    size_type   ind = 0;
+    size_type   j = 0;
+    size_type free_mem;
 
-// }
+    if (count == 0){
+        return pos;
+    }
+    free_mem = this->_capacity - this->_size;
+    if (free_mem < count) {
+        this->reserve(this->_capacity + count - free_mem);
+    }
+    while (pos != this->begin()) {
+        pos--;
+        ind++;
+    }
+    _new_array = this->_allocator.allocate(this->_capacity);
+    this->_size += count;
+    for (int i = 0; i <= this->_size; i++) {
+        if (i == ind) {
+            for (int k = 0; k <= count; k++) {
+                this->_allocator.construct(_new_array + i + k, value);
+            }
+            i += count - 1;
+        }
+        else {
+            this->_allocator.construct(_new_array + i, *(this->_base_array + j));
+            j++;
+        }
+    }
+    for (int i = 0; i < this->_size; i++) {
+        this->_allocator.destroy(this->_base_array + i);
+    }
+    this->_allocator.deallocate(this->_base_array, this->_capacity);
+    this->_base_array = _new_array;
+    return (iterator(this->_base_array + ind));
+}
 
 // template<class value_type>
 // template<class InputIterator>

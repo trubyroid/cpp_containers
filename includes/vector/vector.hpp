@@ -97,7 +97,7 @@ namespace ft
 // --------------------- Modifiers ---------------------------- //
 
 			iterator 												insert(iterator pos, const value_type& val);
-			// void insert(const_iterator pos, size_type count, const value_type& value );
+			iterator												insert(iterator pos, size_type count, const value_type& value );
 			// template <class InputIterator>
 			// 	void insert(iterator position, InputIterator first, InputIterator last,
 			// 		typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);

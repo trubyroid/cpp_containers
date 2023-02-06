@@ -1,10 +1,10 @@
 #include <iostream>
 #include <string>
 
-#include <vector>
-namespace ft = std;
+// #include <vector>
+// namespace ft = std;
 
-// #include "../../includes/vector/vector.hpp"
+#include "../../includes/vector/vector.hpp"
 
 
 int main() {
