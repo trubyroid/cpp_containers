@@ -30,7 +30,7 @@ int main() {
         ft::vector<int>::iterator it_4 = vec.begin();
 
         ft::vector<int>::iterator it_3 = vec.insert(it_4, 8);
-        // std::cout << std::endl << *it_3 << std::endl;
+        std::cout << std::endl << *it_3 << std::endl;
 
         for (int i = 0; i < vec.size(); i++) {
             std::cout << vec.at(i);

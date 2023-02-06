@@ -36,6 +36,14 @@ vector<value_type>::vector(const vector& copy) {
     }
 }
 
+// template <class InputIterator>
+// vector<InputIterator>::vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
+// 		typename ft::enable_if<ft::is_iterator<InputIterator>::value>::type* = 0)
+// 		:_size(0), _capacity(1), _alloc(alloc) {
+// 	_arr = _alloc.allocate(_capacity);
+// 	insert(this->begin(), first, last);
+// }
+
 template<class value_type>
 vector<value_type>::~vector() {
     for (size_type i = 0; i < this->_size; i++) {
@@ -65,7 +73,7 @@ vector<value_type>::~vector() {
 //     difference_type n = ft::distance(tmp, last);
 //     this->_base_array = this->_allocator.allocate(this->_capacity);      //n?
 //     this->_size = n;
-//     // this->_capacity = n;
+//     this->_capacity = n;
 //     for (size_type i = 0; first != last; ++i) {
 // 		this->_base_array[i] = *first;
 // 		++first;

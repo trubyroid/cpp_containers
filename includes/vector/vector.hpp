@@ -40,13 +40,13 @@ namespace ft
 			explicit vector(size_type size, const value_type& val = value_type());
 			// template <class InputIterator>
 			// vector(InputIterator first, InputIterator last,
-				// typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
+			// 	typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
 			vector(const vector& copy);
 			~vector();
 
-			// template< class InputIt >
-			// void assign( InputIt first, InputIt last,
-			// 			typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL);
+			template< class InputIt >
+			void assign( InputIt first, InputIt last,
+						typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL);
 			void													assign(size_type count, const value_type& val);
 			allocator_type											get_allocator() const;
 // --------------------- Element Access ----------------------- //
