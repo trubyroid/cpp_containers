@@ -1,10 +1,10 @@
 #include <iostream>
 #include <string>
 
-// #include <vector>
-// namespace ft = std;
+#include <vector>
+namespace ft = std;
 
-#include "../../includes/vector/vector.hpp"
+// #include "../../includes/vector/vector.hpp"
 
 
 int main() {
@@ -76,37 +76,37 @@ int main() {
         std::cout << "Capacity: " << vec.capacity();
     }
 
-    // std::cout << std::endl << std::endl << "~~~~~~~~ ASSIGN ITERATOR TEST." << std::endl << std::endl;
-    // {
-    //     ft::vector<int>                 vec(3, 9);
-    //     ft::vector<int>                 vec_1(5, 8);
-    //     ft::vector<int>::iterator       begin = vec.begin();
-    //     ft::vector<int>::iterator       end = vec.end();
-    //     int                             *p;
+    std::cout << std::endl << std::endl << "~~~~~~~~ ASSIGN ITERATOR TEST." << std::endl << std::endl;
+    {
+        ft::vector<int>                 vec(3, 9);
+        ft::vector<int>                 vec_1(5, 8);
+        ft::vector<int>::iterator       begin = vec.begin();
+        ft::vector<int>::iterator       end = vec.end();
+        int                             *p;
 
-    //     p = vec.data();
-    //     std::cout << "VEC: ";
-    //     for (int i = 0; i < vec.size(); i++) {
-    //         std::cout << *p;
-    //         p++;
-    //     }
+        p = vec.data();
+        std::cout << "VEC: ";
+        for (int i = 0; i < vec.size(); i++) {
+            std::cout << *p;
+            p++;
+        }
 
-    //     p = vec_1.data();
-    //     std::cout << std::endl << "VEC_1: ";
-    //     for (int i = 0; i < vec_1.size(); i++) {
-    //         std::cout << *p;
-    //         p++;
-    //     }
+        p = vec_1.data();
+        std::cout << std::endl << "VEC_1: ";
+        for (int i = 0; i < vec_1.size(); i++) {
+            std::cout << *p;
+            p++;
+        }
 
-    //     vec_1.assign(begin, end);
+        vec_1.assign(begin, end);
 
-    //     p = vec_1.data();
-    //     std::cout << std::endl << "VEC_1: ";
-    //     for (int i = 0; i < vec_1.size(); i++) {
-    //         std::cout << *p;
-    //         p++;
-    //     }
-    // }
+        p = vec_1.data();
+        std::cout << std::endl << "VEC_1: ";
+        for (int i = 0; i < vec_1.size(); i++) {
+            std::cout << *p;
+            p++;
+        }
+    }
 
 
     std::cout << std::endl << std::endl << "~~~~~~~~ AT TEST." << std::endl << std::endl;

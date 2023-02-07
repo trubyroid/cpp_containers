@@ -9,7 +9,7 @@
 
 # include "iterator.hpp"
 # include "reverse_iterator.hpp"
-// # include "../utils/utils.hpp"
+# include "../utils/utils.hpp"
 
 namespace ft
 {
@@ -44,9 +44,9 @@ namespace ft
 			vector(const vector& copy);
 			~vector();
 
-			template< class InputIt >
-			void assign( InputIt first, InputIt last,
-						typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL);
+			template< class InputIterator >
+				void assign( InputIterator first, InputIterator last,
+					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
 			void													assign(size_type count, const value_type& val);
 			allocator_type											get_allocator() const;
 // --------------------- Element Access ----------------------- //
