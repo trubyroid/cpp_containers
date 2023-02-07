@@ -38,9 +38,11 @@ namespace ft
 // --------------------- Member functions --------------------- //		
             explicit vector();
 			explicit vector(size_type size, const value_type& val = value_type());
-			// template <class InputIterator>
-			// vector(InputIterator first, InputIterator last,
-			// 	typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
+
+			template <class InputIterator>
+			vector(InputIterator first, InputIterator last,
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
+
 			vector(const vector& copy);
 			~vector();
 
@@ -98,9 +100,10 @@ namespace ft
 
 			iterator 												insert(iterator pos, const value_type& val);
 			iterator												insert(iterator pos, size_type count, const value_type& value );
-			// template <class InputIterator>
-			// 	void insert(iterator position, InputIterator first, InputIterator last,
-			// 		typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
+
+			template <class InputIterator>
+				iterator insert(iterator pos, InputIterator first, InputIterator last,
+					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
 					
 			iterator												erase(iterator pos);
 			iterator												erase(iterator first, iterator last);

@@ -1,10 +1,10 @@
 #include <iostream>
 #include <string>
 
-#include <vector>
-namespace ft = std;
+// #include <vector>
+// namespace ft = std;
 
-// #include "../../includes/vector/vector.hpp"
+#include "../../includes/vector/vector.hpp"
 
 
 int main() {
@@ -13,12 +13,12 @@ int main() {
 
     {
         ft::vector<int>             vec;
-        ft::vector<int>             vec_1(3, 5);
+        ft::vector<int>             vec_1(3, 7);
         ft::vector<int>             vec_2(vec_1);
 
-        // ft::vector<int>::iterator   beg = vec_2.begin();
-        // ft::vector<int>::iterator   end = vec_2.end();
-        // ft::vector<int>             vec_3(beg, end);
+        ft::vector<int>::iterator   beg = vec_2.begin();
+        ft::vector<int>::iterator   end = vec_2.end();
+        ft::vector<int>             vec_3(beg, end);
         
 
         std::cout << "VEC: " << vec.size() << ", " << vec.capacity() << ", " << std::endl;
@@ -36,12 +36,12 @@ int main() {
             std::cout << vec_2.at(i);
         }
 
-        // std::cout << std::endl << "VEC_3: " << vec_3.size() << ", " << vec_3.capacity() << ", ";
-        // p = vec_3.data();
-        // for (int i = 0; i < vec_3.size(); i++) {
-        //     std::cout << *p;
-        //     p++;
-        // }
+        std::cout << std::endl << "VEC_3: " << vec_3.size() << ", " << vec_3.capacity() << ", ";
+        int *p = vec_3.data();
+        for (int i = 0; i < vec_3.size(); i++) {
+            std::cout << *p;
+            p++;
+        }
 
     }
 

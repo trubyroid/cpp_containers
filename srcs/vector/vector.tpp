@@ -36,13 +36,18 @@ vector<value_type>::vector(const vector& copy) {
     }
 }
 
-// template <class InputIterator>
-// vector<InputIterator>::vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
-// 		typename ft::enable_if<ft::is_iterator<InputIterator>::value>::type* = 0)
-// 		:_size(0), _capacity(1), _alloc(alloc) {
-// 	_arr = _alloc.allocate(_capacity);
-// 	insert(this->begin(), first, last);
-// }
+template<class value_type>
+template<class InputIterator>
+vector<value_type>::vector(InputIterator first, InputIterator last,
+	typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type*) {
+    this->_size = 0;
+    this->_capacity = 0;
+	if (first > last) {
+		throw std::length_error("constructor");
+	}
+	_base_array = _allocator.allocate(size_type(last - first));
+	this->insert(this->begin(), first, last);
+}
 
 template<class value_type>
 vector<value_type>::~vector() {
@@ -72,32 +77,6 @@ void vector<value_type>::assign(InputIterator first, InputIterator last,
 			push_back(*(first++));
 	}
 }
-
-// template<class value_type>
-// template<class InputIterator>
-// void vector<value_type>::assign(InputIterator first, InputIterator last,
-// 	typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type*) {
-//     if (first > last) {
-// 		throw std::length_error("vector");
-// 	}
-//     if (this->_base_array) {
-//         for (size_type i = 0; i < this->_size; i++) {
-//             this->_allocator.destroy(this->_base_array + i);
-//         }
-//         if (!this->empty()) {
-//             this->_allocator.deallocate(this->_base_array, this->_capacity);
-//         }
-//     }
-//     InputIt tmp = first;
-//     difference_type n = ft::distance(tmp, last);
-//     this->_base_array = this->_allocator.allocate(this->_capacity);      //n?
-//     this->_size = n;
-//     this->_capacity = n;
-//     for (size_type i = 0; first != last; ++i) {
-// 		this->_base_array[i] = *first;
-// 		++first;
-// 	}
-// }
 
 template<class value_type>
 void vector<value_type>::assign(size_type count, const value_type& val) {
@@ -431,14 +410,12 @@ vector<value_type>::insert(iterator pos, size_type count, const value_type& valu
     value_type  *_new_array;
     size_type   ind = 0;
     size_type   j = 0;
-    size_type free_mem;
 
     if (count == 0){
         return pos;
     }
-    free_mem = this->_capacity - this->_size;
-    if (free_mem < count) {
-        this->reserve(this->_capacity + count - free_mem);
+    if (this->_size + count > this->_capacity) {
+        this->reserve(this->_size + count);
     }
     while (pos != this->begin()) {
         pos--;
@@ -448,8 +425,7 @@ vector<value_type>::insert(iterator pos, size_type count, const value_type& valu
     if (!_new_array) {
         throw std::bad_alloc();
     }
-    this->_size += count;
-    for (int i = 0; i <= this->_size; i++) {
+    for (int i = 0; i <= this->_size + count; i++) {
         if (i == ind) {
             for (int k = 0; k <= count; k++) {
                 this->_allocator.construct(_new_array + i + k, value);
@@ -466,15 +442,50 @@ vector<value_type>::insert(iterator pos, size_type count, const value_type& valu
     }
     this->_allocator.deallocate(this->_base_array, this->_capacity);
     this->_base_array = _new_array;
+    this->_size += count;
     return (iterator(this->_base_array + ind));
 }
 
-// template<class value_type>
-// template<class InputIterator>
-// void vector<value_type>::insert(iterator pos, InputIterator first, InputIterator last,
-// 	typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type*) {
+template<class value_type>
+template<class InputIterator>
+typename vector<value_type>::iterator
+vector<value_type>::insert(iterator pos, InputIterator first, InputIterator last,
+	typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type*) {
+    value_type  *_new_array;
+    size_type   ind = 0;
+    size_type   j = 0;
+    size_type   num;
 
-// }
+    num = size_type(last - first);
+	if (this->_size + num > this->_capacity)
+		reserve(this->_size + num);
+    while (pos > this->begin()) {
+        pos--;
+        ind++;
+    }
+    _new_array = this->_allocator.allocate(this->_capacity);
+    if (!_new_array) {
+        throw std::bad_alloc();
+    }
+    for (int i = 0; i <= this->_size + num; i++) {
+        if (i == ind) {
+            for (;first != last; i++) {
+                this->_allocator.construct(_new_array + i, *(first++));
+            }
+        }
+        else {
+            this->_allocator.construct(_new_array + i, *(this->_base_array + j));
+            j++;
+        }
+    }
+    for (int i = 0; i < this->_size; i++) {
+        this->_allocator.destroy(this->_base_array + i);
+    }
+    this->_allocator.deallocate(this->_base_array, this->_capacity);
+    this->_base_array = _new_array;
+    this->_size += num;
+    return (iterator(this->_base_array + ind));
+}
 
 template<class value_type>
 typename vector<value_type>::iterator
