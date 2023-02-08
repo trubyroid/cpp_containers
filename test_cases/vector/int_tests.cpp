@@ -1,10 +1,10 @@
 #include <iostream>
 #include <string>
 
-// #include <vector>
-// namespace ft = std;
+#include <vector>
+namespace ft = std;
 
-#include "../../includes/vector/vector.hpp"
+// #include "../../includes/vector/vector.hpp"
 
 
 int main() {
@@ -218,7 +218,87 @@ int main() {
         }
     }
 
-    // std::cout << std::endl << std::endl << "~~~~~~~~ INSERT TEST." << std::endl << std::endl; {}
+    std::cout << std::endl << std::endl << "~~~~~~~~ INSERT_1 TEST." << std::endl << std::endl;
+    {
+        ft::vector<int> vec(1,5);
+        ft::vector<int>::iterator it = vec.begin();
+        it++;
+
+        vec.resize(2,4);
+        vec.resize(3,3);
+        std::cout << "VECTOR BEFORE INSERT_1: " << std::endl;
+        std::cout << "SIZE: " << vec.size() << std::endl;
+        std::cout << "CAPACITY: " << vec.capacity() << std::endl;                                               ///////////////////
+        for (int i = 0; i < vec.size(); i++) {
+            std::cout << vec.at(i);
+        }
+        std::cout << std::endl << std::endl;
+
+        vec.insert(it, 8);
+        std::cout << "VECTOR AFTER INSERT_1: " << std::endl;
+        std::cout << "SIZE: " << vec.size() << std::endl;
+        std::cout << "CAPACITY: " << vec.capacity() << std::endl;
+        for (int i = 0; i < vec.size(); i++) {
+            std::cout << vec.at(i);
+        }
+        std::cout << std::endl;
+    }
+
+    std::cout << std::endl << std::endl << "~~~~~~~~ INSERT_2 TEST." << std::endl << std::endl;
+    {
+        ft::vector<int> vec(1,5);
+        ft::vector<int>::iterator it = vec.begin();
+        it++;
+
+        vec.resize(2,4);
+        vec.resize(3,3);
+        std::cout << "VECTOR BEFORE INSERT_2: " << std::endl;
+        std::cout << "SIZE: " << vec.size() << std::endl;
+        std::cout << "CAPACITY: " << vec.capacity() << std::endl;                                               ///////////////////
+        for (int i = 0; i < vec.size(); i++) {
+            std::cout << vec.at(i);
+        }
+        std::cout << std::endl << std::endl;
+
+        vec.insert(it, 8, 9);
+        std::cout << "VECTOR AFTER INSERT_2: " << std::endl;
+        std::cout << "SIZE: " << vec.size() << std::endl;
+        std::cout << "CAPACITY: " << vec.capacity() << std::endl;
+        for (int i = 0; i < vec.size(); i++) {
+            std::cout << vec.at(i);
+        }
+        std::cout << std::endl;
+    }
+
+    std::cout << std::endl << std::endl << "~~~~~~~~ INSERT_3 TEST." << std::endl << std::endl;
+    {
+        ft::vector<int> vec(10,5);
+        ft::vector<int> vec1(5,6);
+        vec.resize(2,4);
+        vec.resize(3,3);
+
+        ft::vector<int>::iterator it = vec1.begin();
+        ft::vector<int>::iterator it1 = vec.begin();
+        ft::vector<int>::iterator it2 = vec.end();
+        it++;
+
+        std::cout << "VECTOR BEFORE INSERT_3: " << std::endl;
+        std::cout << "SIZE: " << vec.size() << std::endl;
+        std::cout << "CAPACITY: " << vec.capacity() << std::endl;                                               ///////////////////
+        for (int i = 0; i < vec.size(); i++) {
+            std::cout << vec.at(i);
+        }
+        std::cout << std::endl << std::endl;
+
+        vec1.insert(it, it1, it2);
+        std::cout << "VECTOR AFTER INSERT_3: " << std::endl;
+        std::cout << "SIZE: " << vec1.size() << std::endl;
+        std::cout << "CAPACITY: " << vec1.capacity() << std::endl;
+        for (int i = 0; i < vec1.size(); i++) {
+            std::cout << vec1.at(i);
+        }
+        std::cout << std::endl;
+    }
 
     std::cout << std::endl << std::endl << "~~~~~~~~ ERASE TEST." << std::endl << std::endl;
     {
@@ -571,4 +651,4 @@ int main() {
 
 
 
-// выводим версию с дефолтным и моим векторами в два разных файла, после чего сравниваем их с помощью FC
+// выводим версию с дефолтным и моим векторами в два разных файла, после чего сравниваем их с помощью diff
