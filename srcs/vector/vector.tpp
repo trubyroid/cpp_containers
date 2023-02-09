@@ -26,7 +26,7 @@ vector<value_type>::vector(size_type size, const value_type& val) {
 template<class value_type>
 vector<value_type>::vector(const vector& copy) {
     this->_size = copy.size();
-    this->_capacity = copy.capacity();
+    this->_capacity = copy.size();
     this->_base_array = this->_allocator.allocate(this->_capacity);
     if (!this->_base_array) {
         throw std::bad_alloc();
@@ -306,7 +306,7 @@ vector<value_type>::rbegin() const {
 template<class value_type>
 typename vector<value_type>::const_reverse_iterator
 vector<value_type>::rend() const {
-	return reverse_iterator(this->_base_array);
+	return const_reverse_iterator(this->_base_array);
 }
 
 // --------------------- Capacity ------------------------------------ //
@@ -337,6 +337,8 @@ vector<value_type>::max_size() const {\
 
 template<class value_type>
 void vector<value_type>::reserve(size_type new_cap) {
+    if(new_cap > this->max_size())
+        throw std::length_error("vector: reserve: length > max_size");
     if (new_cap > this->_capacity) {
         pointer  _new_array = this->_allocator.allocate(new_cap);
         if (!_new_array) {
@@ -375,10 +377,7 @@ vector<value_type>::insert(iterator pos, const value_type& value) {
     size_type   ind = 0;
     size_type   j = 0;
 
-    while (pos != this->begin()) {
-        pos--;
-        ind++;
-    }
+    ind = pos - this->begin();
     if (this->_size == this->_capacity) {
         this->reserve(this->_capacity * 2);
     }
@@ -415,11 +414,8 @@ vector<value_type>::insert(iterator pos, size_type count, const value_type& valu
     if (count == 0){
         return pos;
     }
-    while (pos != this->begin()) {
-        pos--;
-        ind++;
-    }
-    if (this->_size == this->_capacity) {
+    ind = pos - this->begin();
+    if (this->_size + count > this->_capacity) {
         new_cap *= 2;
     }
     if (this->_size + count > new_cap) {
@@ -463,11 +459,8 @@ vector<value_type>::insert(iterator pos, InputIterator first, InputIterator last
     size_type   new_cap = this->_capacity;
 
     num = size_type(last - first);
-    while (pos > this->begin()) {
-        pos--;
-        ind++;
-    }
-    if (this->_size == this->_capacity) {
+    ind = pos - this->begin();
+    if (this->_size + num > this->_capacity) {
         new_cap *= 2;
     }
     if (this->_size + num > new_cap) {
@@ -504,10 +497,8 @@ typename vector<value_type>::iterator
 vector<value_type>::erase(iterator pos) {
     size_type   ind = 0;
     iterator    pos_iter = pos;
-    while (pos_iter != this->begin()) {
-        pos_iter--;
-        ind++;
-    }
+
+    ind = pos_iter - this->begin();
     this->_allocator.destroy(this->_base_array + ind);
     for (; ind < this->_size; ind++) {
         this->_allocator.construct(this->_base_array + ind, *(this->_base_array + ind + 1));
@@ -520,27 +511,17 @@ vector<value_type>::erase(iterator pos) {
 template<class value_type>
 typename vector<value_type>::iterator
 vector<value_type>::erase(iterator first, iterator last) {
-    size_type ind_beg = 0;
-    size_type ind_end = 0;
-    size_type interval;
-    iterator    pos_iter_beg = first;
-    iterator    pos_iter_end = last;
-    while (pos_iter_beg != this->begin()) {
-        pos_iter_beg--;
-        ind_beg++;
-    }
-    while (pos_iter_end != this->begin()) {
-        pos_iter_end--;
-        ind_end++;
-    }
-    interval = ind_end - ind_beg;
+    size_type ind_beg = first - this->begin();
+    size_type ind_end = last - this->begin();
+    size_type num = ind_end - ind_beg;
+
     for (size_type i = ind_beg; i < ind_end; i++) {
         this->_allocator.destroy(this->_base_array + i);
     }
-    for (;ind_beg < ind_end && ind_end < this->_size; ind_beg++ && ind_end) {
+    for (; ind_end < this->_size; ind_end++ && ind_beg++) {
         this->_allocator.construct(this->_base_array + ind_beg, *(this->_base_array + ind_end));
     }
-    this->_size = this->_size - interval;
+    this->_size -= num;
     return (first);
 }
 
@@ -570,8 +551,11 @@ void vector<value_type>::resize(size_type count, const value_type& val) {
     if (count < 0 || count > this->max_size())
         throw std::length_error("resize vector");  
     if (count >= this->_capacity) {
-        while (new_cap < count){
+        if (this->_size == this->_capacity) {
             new_cap *= 2;
+        }
+        if (new_cap < count){
+            new_cap = count;
         }
         reserve(new_cap);
         for (; this->_size < count; this->_size++) {
