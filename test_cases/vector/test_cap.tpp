@@ -1,17 +1,7 @@
-#include "../../includes/vector/vector.hpp"
-#include "colours.hpp"
-#include <vector>
-#include <iterator>
-#include <iostream>
-#include "../../includes/utils/utils.hpp"
+#include "tests.hpp"
 
 
-void test_name(std::string name)
-{
-	std::cout << COLOUR_BLUE << name << COLOUR_RED << std::endl;
-}
-
-int main(void)
+void test_cap()
 {
     std::cout << COLOUR_BLUE;
 	ft::vector<int>			my_v(3, 3);
@@ -29,6 +19,7 @@ int main(void)
 	assert(3 == my_v.capacity());
 
 	test_name("Testing method .empty()");
+
 	ft::vector<int> my_2nd_v;
 	assert(true == my_2nd_v.empty());
 	assert(false == my_v.empty());

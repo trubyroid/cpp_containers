@@ -1,17 +1,6 @@
-#include "../../includes/vector/vector.hpp"
-#include "colours.hpp"
-#include <iostream>
-#include <vector>
-#include <iterator>
-#include "../../includes/utils/utils.hpp"
-#include <assert.h>
+#include "tests.hpp"
 
-void test_name(std::string name)
-{
-	std::cout << COLOUR_BLUE << name << COLOUR_RED << std::endl;
-}
-
-int main(void)
+void test_iter()
 {
 	ft::vector<int>						my_v;
 	std::vector<int>					og_v;

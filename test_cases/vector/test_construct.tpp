@@ -1,15 +1,6 @@
-#include "../../includes/vector/vector.hpp"
-#include <iostream>
-#include "colours.hpp"
-#include <vector>
-#include "../../includes/utils/utils.hpp"
+#include "tests.hpp"
 
-void test_name(std::string name)
-{
-	std::cout << COLOUR_BLUE << name << COLOUR_RED << std::endl;
-}
-
-int main(void)
+void test_construct(void)
 {
 	test_name("Testing the default constructor");
 	ft::vector<int> test;
@@ -90,6 +81,4 @@ int main(void)
 		my_new_empty = my_newer_empty;
 		assert(my_new_empty == my_newer_empty);
 	}
-
-	return (0);
 }

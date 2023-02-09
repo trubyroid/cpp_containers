@@ -1,16 +1,6 @@
-#include "../../includes/vector/vector.hpp"
-# include "colours.hpp"
-# include <vector>
-# include <iterator>
-# include <iostream>
-#include "../../includes/utils/utils.hpp"
+#include "tests.hpp"
 
-void test_name(std::string name)
-{
-	std::cout << COLOUR_BLUE << name << COLOUR_RED << std::endl;
-}
-
-int main(void)
+void test_ele(void)
 {
 	ft::vector<int> my_v(3, 3);
 	std::vector<int> og_v(3, 3);
@@ -80,6 +70,4 @@ int main(void)
 		assert(4 == my_v_const.back());
 	}
 
-	std::cout << COLOUR_DEFAULT;
-	return (0);
 }

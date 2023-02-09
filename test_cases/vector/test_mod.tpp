@@ -1,32 +1,6 @@
-#include "../../includes/vector/vector.hpp"
-#include "colours.hpp"
-#include <vector>
-#include "../../includes/utils/utils.hpp"
-#include <iterator>
-#include <iostream>
+#include "tests.hpp"
 
-void test_name(std::string name)
-{
-	std::cout << COLOUR_BLUE << name << COLOUR_RED << std::endl;
-}
-
-void test_capacity_size_values(ft::vector<int> &mine, std::vector<int> &original)
-{
-    // std::cout << COLOUR_PURPLE;
-    // std::cout << original.capacity()                    << " o/ capacity /m " << mine.capacity() << "\n";
-    // std::cout << original.size()                        << " o/   size   /m " << mine.size() << "\n";
-    // std::cout << original.end() - original.begin()      << " o/ it  diff /m " << mine.end()-mine.begin()  << "\n";
-    // std::cout << COLOUR_RED;
-    // std::cout << std::endl;
-	
-    assert(original.capacity() == mine.capacity());
-    assert(original.size() == mine.size());
-	
-	for (size_t i = 0; i < original.size(); i++)
-        assert(original[i] == mine[i]);
-}
-
-int main(void)
+void test_mod(void)
 {
 	ft::vector<int>			my_v(3, 3);
 	std::vector<int>		og_v(3, 3);
@@ -244,12 +218,11 @@ int main(void)
 	    ft::vector<int> v2_copy(v2);
 	    {
 		    test_name("Testing non-member swap");
-		    //befor swap
 		    for (size_t i = 0; i < v1.size(); i++)
 			    assert(v1_copy[i] == v1[i]);
 			
 		    ft::swap(v1, v2);
-		    //after swap
+            
 		    for (size_t i = 0; i < v1_copy.size(); i++)
 			    assert(v1_copy[i] == v2[i]);
 		    assert(v1_copy.capacity() == v2.capacity());

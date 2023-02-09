@@ -228,7 +228,7 @@ int main() {
         vec.resize(3,3);
         std::cout << "VECTOR BEFORE INSERT_1: " << std::endl;
         std::cout << "SIZE: " << vec.size() << std::endl;
-        std::cout << "CAPACITY: " << vec.capacity() << std::endl;                                               ///////////////////
+        std::cout << "CAPACITY: " << vec.capacity() << std::endl;
         for (int i = 0; i < vec.size(); i++) {
             std::cout << vec.at(i);
         }
