@@ -106,11 +106,12 @@ void test_mod(void)
 		my_new_v.insert(my_new_v.begin(), 1, 9);
 		og_new_v.insert(og_new_v.begin(), 20, 321);
 		my_new_v.insert(my_new_v.begin(), 20, 321);
-		test_capacity_size_values(my_new_v, og_new_v);                                              //////
+		test_capacity_size_values(my_new_v, og_new_v);
 	}
+
 	std::vector<int> og_vec;
 	ft::vector<int> my_vec;
-	
+
 	{
 		std::vector<int> og_new_v;
 		ft::vector<int> my_new_v;
@@ -144,9 +145,11 @@ void test_mod(void)
 	
 	{
 		test_name("Testing method .erase() single");
+
 		og_it = og_vec.erase(og_vec.end() - 1);
 		my_it = my_vec.erase(my_vec.end() - 1);
-        assert(*og_it == *my_it);
+
+        assert(*--og_it == *--my_it);
 		og_vec.erase(og_vec.end() - 1);
 		my_vec.erase(my_vec.end() - 1);
 		og_vec.erase(og_vec.end() - 1);
@@ -189,13 +192,11 @@ void test_mod(void)
 		ft::vector<int> v1_copy(v1);
 		ft::vector<int> v2_copy(v2);
 
-		//before swap
-		for (size_t i = 0; i < v1.size(); i++) {
-
+		for (size_t i = 0; i < v1.size(); i++)
             assert(v1_copy[i] == v1[i]);
-        }
+
 		v1.swap(v2);
-		//after swap
+
 		for (size_t i = 0; i < v1_copy.size(); i++) {
 
             assert(v1_copy[i] == v2[i]);

@@ -495,10 +495,8 @@ vector<value_type>::insert(iterator pos, InputIterator first, InputIterator last
 template<class value_type>
 typename vector<value_type>::iterator
 vector<value_type>::erase(iterator pos) {
-    size_type   ind = 0;
-    iterator    pos_iter = pos;
+    size_type  ind = pos - this->begin();
 
-    ind = pos_iter - this->begin();
     this->_allocator.destroy(this->_base_array + ind);
     for (; ind < this->_size; ind++) {
         this->_allocator.construct(this->_base_array + ind, *(this->_base_array + ind + 1));

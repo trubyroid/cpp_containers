@@ -68,29 +68,4 @@ void test_iter()
 		test_name("const_rev_it(vector.rend())");
 		assert(*(og_r_it_const_end) == *(my_r_it_const_end));
 	}
-///////////////////////////////////////////////////////////////////////////////////////////////////
-	{
-	    ft::vector<int> nums;
-	    ft::vector<int> nums2(nums);
-
-	    test_name("Testing logical operator ==");
-	    assert(true == (nums == nums2));
-	
-	    test_name("Testing logical operator !=");
-	    assert(false == (nums != nums2));
-
-	    test_name("Testing logical operator <");
-	    assert(false == (nums < nums2));
-
-	    test_name("Testing logical operator <=");
-	    assert(true == (nums <= nums2));
-
-	    test_name("Testing logical operator >");
-	    assert(false == (nums > nums2));
-
-	    test_name("Testing logical operator >=");
-	    assert(true == (nums >= nums2));
-	
-}
-
 }

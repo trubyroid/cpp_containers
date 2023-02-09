@@ -42,9 +42,10 @@ void test_ele();
 void test_iter();
 void test_mod();
 
-#include "test_cap.tpp"
-#include "test_construct.tpp"
-#include "test_ele.tpp"
+#include "constructors.tpp"
+#include "operators.tpp"
+#include "capacity_size.tpp"
+#include "elements.tpp"
 #include "test_iter.tpp"
 #include "test_mod.tpp"
 
