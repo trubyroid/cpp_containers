@@ -385,7 +385,7 @@ vector<value_type>::insert(iterator pos, const value_type& value) {
     if (!_new_array) {
         throw std::bad_alloc();
     }
-    for (int i = 0; i <= this->_size; i++) {
+    for (size_type i = 0; i <= this->_size; i++) {
         if (i == ind) {
             this->_allocator.construct(_new_array + ind, value);
         }
@@ -394,7 +394,7 @@ vector<value_type>::insert(iterator pos, const value_type& value) {
             j++;
         }
     }
-    for (int i = 0; i < this->_size; i++) {
+    for (size_type i = 0; i < this->_size; i++) {
         this->_allocator.destroy(this->_base_array + i);
     }
     this->_allocator.deallocate(this->_base_array, this->_capacity);
@@ -426,9 +426,9 @@ vector<value_type>::insert(iterator pos, size_type count, const value_type& valu
     if (!_new_array) {
         throw std::bad_alloc();
     }
-    for (int i = 0; i <= this->_size + count; i++) {
+    for (size_type i = 0; i <= this->_size + count; i++) {
         if (i == ind) {
-            for (int k = 0; k <= count; k++) {
+            for (size_type k = 0; k <= count; k++) {
                 this->_allocator.construct(_new_array + i + k, value);
             }
             i += count - 1;
@@ -438,7 +438,7 @@ vector<value_type>::insert(iterator pos, size_type count, const value_type& valu
             j++;
         }
     }
-    for (int i = 0; i < this->_size; i++) {
+    for (size_type i = 0; i < this->_size; i++) {
         this->_allocator.destroy(this->_base_array + i);
     }
     this->_allocator.deallocate(this->_base_array, this->_capacity);
@@ -471,7 +471,7 @@ vector<value_type>::insert(iterator pos, InputIterator first, InputIterator last
     if (!_new_array) {
         throw std::bad_alloc();
     }
-    for (int i = 0; i <= this->_size + num; i++) {
+    for (size_type i = 0; i <= this->_size + num; i++) {
         if (i == ind) {
             for (;first != last; i++) {
                 this->_allocator.construct(_new_array + i, *(first++));
@@ -483,7 +483,7 @@ vector<value_type>::insert(iterator pos, InputIterator first, InputIterator last
             j++;
         }
     }
-    for (int i = 0; i < this->_size; i++) {
+    for (size_type i = 0; i < this->_size; i++) {
         this->_allocator.destroy(this->_base_array + i);
     }
     this->_allocator.deallocate(this->_base_array, this->_capacity);

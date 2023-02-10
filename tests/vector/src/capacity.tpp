@@ -1,5 +1,3 @@
-#include "tests.hpp"
-
 
 void capacity()
 {
@@ -30,8 +28,14 @@ void capacity()
 		std::vector<int> 	og_new_v(1, 1);
 		ft::vector<int> 	my_new_v(1, 1);
 
-		og_new_v.resize(3,4);
-		my_new_v.resize(3,4);
+		og_new_v.resize(3,5);
+		my_new_v.resize(3,5);
+		og_new_v.resize(5,2);
+		my_new_v.resize(5,2);
+		og_new_v.resize(10,3);
+		my_new_v.resize(10,3);
+		og_new_v.resize(3,3);
+		my_new_v.resize(3,3);
 		assert(og_new_v.size() == my_new_v.size());
 	}
 	

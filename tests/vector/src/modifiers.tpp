@@ -1,4 +1,12 @@
-#include "tests.hpp"
+
+void check_values(ft::vector<int> &mine, std::vector<int> &original)
+{	
+    assert(original.capacity() == mine.capacity());
+    assert(original.size() == mine.size());
+	
+	for (size_t i = 0; i < original.size(); i++)
+        assert(original[i] == mine[i]);
+}
 
 void modifiers(void)
 {
@@ -39,7 +47,7 @@ void modifiers(void)
 			my_v.push_back(78 + i);
 			og_v.push_back(78 + i);
 		}
-		test_capacity_size_values(my_v, og_v);
+		check_values(my_v, og_v);
 	}
 
 	std::vector<int> og_new_v(1, 1);
@@ -54,33 +62,37 @@ void modifiers(void)
 		test_name("Testing method .assign() range version with iterators");
 		og_new_v.assign(og_it, og_it2);
 		my_new_v.assign(my_it, my_it2);
-		test_capacity_size_values(my_new_v, og_new_v);
+		check_values(my_new_v, og_new_v);
 	}
 
 	{
 		test_name("Testing method .assign() fill verison");
 		og_new_v.assign(4, 0);
 		my_new_v.assign(4, 0);
-		test_capacity_size_values(my_new_v, og_new_v);
+		og_new_v.assign(4, 6);
+		my_new_v.assign(4, 6);
+		og_new_v.assign(4, 8);
+		my_new_v.assign(4, 8);
+		og_new_v.assign(2, 9);
+		my_new_v.assign(2, 9);
+		check_values(my_new_v, og_new_v);
 	}
 	
 	{
 		test_name("Testing method .insert() single element sufficient capacity");
 		og_new_v.insert(og_new_v.begin(), 7);
 		my_new_v.insert(my_new_v.begin(), 7);
-		test_capacity_size_values(my_new_v, og_new_v);
+		check_values(my_new_v, og_new_v);
 	}
 	
 	{
 		test_name("Testing method .insert() single element insufficient capacity");
-        // std::cout << my_new_v.capacity() << " /c/ " << og_new_v.capacity() << "\n";
 		for (size_t i = 0; i < 56; i++)
 		{
 			og_new_v.insert(og_new_v.begin() + 2, 69);
 			my_new_v.insert(my_new_v.begin() + 2, 69);
-            // std::cout << my_new_v.capacity() << " /c/ " << og_new_v.capacity() << "\n";
 		}
-		test_capacity_size_values(my_new_v, og_new_v);
+		check_values(my_new_v, og_new_v);
 		
 		std::vector<int>::iterator og_it_insert_return = og_new_v.insert(og_new_v.end(), 77);
 		ft::vector<int>::iterator my_it_insert_return = my_new_v.insert(my_new_v.end(), 77);
@@ -101,12 +113,12 @@ void modifiers(void)
 		my_new_v.insert(my_new_v.begin(), 1, 7);
 		og_new_v.insert(og_new_v.begin(), 6, 8);
 		my_new_v.insert(my_new_v.begin(), 6, 8);
-		test_capacity_size_values(my_new_v, og_new_v);
+		check_values(my_new_v, og_new_v);
 		og_new_v.insert(og_new_v.begin(), 1, 9);
 		my_new_v.insert(my_new_v.begin(), 1, 9);
 		og_new_v.insert(og_new_v.begin(), 20, 321);
 		my_new_v.insert(my_new_v.begin(), 20, 321);
-		test_capacity_size_values(my_new_v, og_new_v);
+		check_values(my_new_v, og_new_v);
 	}
 
 	std::vector<int> og_vec;
@@ -125,22 +137,22 @@ void modifiers(void)
         test_name("Testing method .insert() range: 1");
 		og_vec.insert(og_vec.begin(), og_new_v.begin(), og_new_v.end());
 		my_vec.insert(my_vec.begin(), my_new_v.begin(), my_new_v.end());
-        test_capacity_size_values(my_vec, og_vec);
+        check_values(my_vec, og_vec);
 
         test_name("Testing method .insert() range: 2");
 		og_vec.insert(og_vec.end(), og_new_v.begin(), og_new_v.end());
 		my_vec.insert(my_vec.end(), my_new_v.begin(), my_new_v.end());
-        test_capacity_size_values(my_vec, og_vec);
+        check_values(my_vec, og_vec);
 
         test_name("Testing method .insert() range: 3");
         og_vec.insert(og_vec.end(), og_new_v.begin(), og_new_v.end());
 		my_vec.insert(my_vec.end(), my_new_v.begin(), my_new_v.end());
-        test_capacity_size_values(my_vec, og_vec);
+        check_values(my_vec, og_vec);
 
         test_name("Testing method .insert() range: 4");
         og_vec.insert(og_vec.end(), og_new_v.begin(), og_new_v.end());
 		my_vec.insert(my_vec.end(), my_new_v.begin(), my_new_v.end());
-        test_capacity_size_values(my_vec, og_vec);
+        check_values(my_vec, og_vec);
 	}
 	
 	{
@@ -160,7 +172,7 @@ void modifiers(void)
 		my_vec.erase(my_vec.begin());
 		og_vec.erase(og_vec.begin());
 		my_vec.erase(my_vec.begin());
-		test_capacity_size_values(my_vec, og_vec);
+		check_values(my_vec, og_vec);
 	}
 	
 	{
@@ -174,15 +186,15 @@ void modifiers(void)
 		}
 		og_vec.erase(og_vec.begin(), og_vec.begin() + 2);
 		my_vec.erase(my_vec.begin(), my_vec.begin() + 2);
-		test_capacity_size_values(my_vec, og_vec);
+		check_values(my_vec, og_vec);
 		
 		og_vec.erase(og_vec.begin(), og_vec.begin() + 2);
 		my_vec.erase(my_vec.begin(), my_vec.begin() + 2);
-		test_capacity_size_values(my_vec, og_vec);
+		check_values(my_vec, og_vec);
 		
 		og_vec.erase(og_vec.end() - 5, og_vec.end());
 		my_vec.erase(my_vec.end() - 5, my_vec.end());
-		test_capacity_size_values(my_vec, og_vec);
+		check_values(my_vec, og_vec);
 	}
 
 	{
@@ -234,6 +246,5 @@ void modifiers(void)
 		    assert(v2_copy.capacity() == v1.capacity());
 		    assert(v2_copy.size() == v1.size());
 	}
-	std::cout << COLOUR_DEFAULT;
 }
 }

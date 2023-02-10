@@ -1,7 +1,7 @@
 #include "tests.hpp"
 
 int main() {
-    std::cout << COLOUR_GREEN << "Test started." << std::endl;
+    std::cout << COLOUR_GREEN << std::endl << "Test started." << std::endl;
     constructors();
     std::cout << COLOUR_GREEN << "Constructors test passed successfully." << std::endl;
     operators();
@@ -13,7 +13,7 @@ int main() {
     iterators();
     std::cout << COLOUR_GREEN << "Iterators test passed successfully." << std::endl;
     modifiers();
-    std::cout << COLOUR_GREEN << "Modifiers test passed successfully." << std::endl << std::endl;
-    
+    std::cout << COLOUR_GREEN << "Modifiers test passed successfully." << std::endl;
+    std::cout << COLOUR_DEFAULT << std::endl;
     std::cout << COLOUR_GREEN << "All tests passed successfully." << std::endl;
 }

@@ -29,13 +29,13 @@ void operators() {
 		ft::vector<int> my_empty;
 		my_empty = my_numbers;
 		assert(my_empty == my_numbers);
-		for (int i = 0; i < my_empty.size(); i++)
+		for (size_t i = 0; i < my_empty.size(); i++)
 			assert(33 == my_empty[i]);
 
 		ft::vector<int> my_non_empty(7, 7);
 		my_non_empty = my_numbers;
 		assert(my_non_empty == my_numbers);
-		for (int i = 0; i < my_non_empty.size(); i++)
+		for (size_t i = 0; i < my_non_empty.size(); i++)
 			assert(33 == my_non_empty[i]);
 
 		ft::vector<int> my_new_empty;
