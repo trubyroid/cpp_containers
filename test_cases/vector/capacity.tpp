@@ -1,7 +1,7 @@
 #include "tests.hpp"
 
 
-void capacity_size()
+void capacity()
 {
 	{
 		std::vector<int>		og_v(3, 3);

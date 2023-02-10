@@ -1,6 +1,6 @@
 #include "tests.hpp"
 
-void test_mod(void)
+void modifiers(void)
 {
 	ft::vector<int>			my_v(3, 3);
 	std::vector<int>		og_v(3, 3);

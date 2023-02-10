@@ -36,18 +36,12 @@ void test_capacity_size_values(ft::vector<int> &mine, std::vector<int> &original
         assert(original[i] == mine[i]);
 }
 
-void test_cap();
-void test_construct();
-void test_ele();
-void test_iter();
-void test_mod();
-
 #include "constructors.tpp"
 #include "operators.tpp"
-#include "capacity_size.tpp"
+#include "capacity.tpp"
 #include "elements.tpp"
-#include "test_iter.tpp"
-#include "test_mod.tpp"
+#include "iterators.tpp"
+#include "modifiers.tpp"
 
 
 #endif
