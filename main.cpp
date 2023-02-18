@@ -4,12 +4,12 @@
 #include <stdlib.h>
 
 // #if 1 //CREATE A REAL STL EXAMPLE
-	#include <map>
+	// #include <map>
 	#include <stack>
 	// #include <vector>
 	// namespace ft = std;
 // #else
-	// #include "includes/map/map.hpp"
+	#include "includes/map/map.hpp"
 	// #include <stack.hpp>
 	#include "includes/vector/vector.hpp"
 // #endif
@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
 	std::stack<int> stack_int;
 	ft::vector<Buffer> vector_buffer;
 	std::stack<Buffer, std::deque<Buffer> > stack_deq_buffer;
-	std::map<int, int> map_int;
+	ft::map<int, int> map_int;
 
 	for (int i = 0; i < COUNT; i++)
 	{
@@ -102,7 +102,7 @@ int main(int argc, char** argv) {
 	std::cout << "should be constant with the same seed: " << sum << std::endl;
 
 	{
-		std::map<int, int> copy = map_int;
+		ft::map<int, int> copy = map_int;
 	}
 	MutantStack<char> iterable_stack;
 	for (char letter = 'a'; letter <= 'z'; letter++)
