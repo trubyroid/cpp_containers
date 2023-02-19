@@ -1,9 +1,10 @@
 #ifndef BINARY_SEARCH_TREE_HPP
 # define BINARY_SEARCH_TREE_HPP
 
-#include "./utils.hpp"
+#include "./utils_1.hpp"
 #include "./binary_search_tree_iterator.hpp"
-
+#include <string.h>
+#include <typeinfo>
 
 namespace ft
 {
@@ -13,23 +14,18 @@ namespace ft
 	{
 		public :
 
-			typedef Binary_search_tree  self;
+			typedef Binary_search_tree  								self;
+			typedef self&   											self_reference;
+			typedef T   												value_type;
+			typedef Node 												node_type;
+			typedef Node *												node_pointer;
+			typedef Node_Alloc											node_alloc;
+			typedef ft::BST_iterator<Node, Compare>						iterator;
+			typedef ft::BST_const_iterator<Node, Compare>				const_iterator;
+			typedef size_t 												size_type;
 
-			typedef self&   self_reference;
-			
-			typedef T   value_type;
-
-			typedef Node node_type;
-
-			typedef Node *  node_pointer;
-			
-			typedef Node_Alloc  node_alloc;
-
-			typedef ft::BST_iterator<Node, Compare> iterator;
-
-			typedef ft::BST_const_iterator<Node, Compare> const_iterator;
-			
-			typedef size_t size_type;
+			node_pointer    											_last_node;
+			node_alloc      											_node_alloc;
 
 			Binary_search_tree (const node_alloc& node_alloc_init = node_alloc())
 			:
@@ -117,8 +113,6 @@ namespace ft
 			size_type max_size() const
 			{ return (node_alloc().max_size()); }
 
-			node_pointer    _last_node;
-			node_alloc      _node_alloc;
 
 		private :
 
@@ -153,7 +147,7 @@ namespace ft
 
 				_last_node->left = _BST_get_lower_node(_last_node->parent);
 				_last_node->right = _BST_get_higher_node(_last_node->parent);
-				_last_node->value.first -= 1;
+				// _last_node->value.first -= 1;
 				
 				new_node->parent = node->parent;
 				
@@ -199,7 +193,7 @@ namespace ft
 
 				_last_node->left = _BST_get_lower_node(_last_node->parent);
 				_last_node->right = _BST_get_higher_node(_last_node->parent);
-				_last_node->value.first -= 1;
+				// _last_node->value.first -= 1;
 
 				_node_alloc.destroy(to_remove);
 				_node_alloc.deallocate(to_remove, 1);

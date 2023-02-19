@@ -533,10 +533,10 @@ namespace ft
 
             typedef T   value_type;
 
-            value_type value;
-            BST_Node* parent;
-            BST_Node* left;
-            BST_Node* right;
+            value_type  value;
+            BST_Node*   parent;
+            BST_Node*   left;
+            BST_Node*   right;
 
             BST_Node ()
             :

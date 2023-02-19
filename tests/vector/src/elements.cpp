@@ -1,5 +1,5 @@
 
-void elements(void)
+void vector_elements(void)
 {
 	std::vector<int> 		og_v(3, 3);
 	ft::vector<int> 		my_v(3, 3);

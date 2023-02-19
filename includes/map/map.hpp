@@ -10,8 +10,8 @@ namespace ft
 				class Alloc = std::allocator<ft::pair<const Key, T> > >
 	class map
 	{
-		public:
 
+		public:
 
 			typedef Key     																	key_type;
 			typedef T       																	mapped_type;
@@ -41,7 +41,15 @@ namespace ft
 			typedef typename ft::reverse_iterator<iterator>    									reverse_iterator;
 			typedef typename ft::reverse_iterator<const_iterator> 								const_reverse_iterator;
 			typedef typename ft::iterator_traits<iterator>::difference_type 					difference_type;
-			typedef size_t size_type;
+			typedef size_t 																		size_type;
+
+		private:
+
+			allocator_type                          											_alloc;
+			Compare                                 											_comp;
+			Binary_search_tree<value_type, Compare>  											_bst;
+
+		public:
 
 			explicit map (const key_compare& comp = key_compare(),
 				const allocator_type& alloc = allocator_type())
@@ -50,6 +58,7 @@ namespace ft
 				_comp(comp),
 				_bst()
 			{}
+
 			template <class InputIterator>
 				map (InputIterator first, InputIterator last,
 					const key_compare& comp = key_compare(),
@@ -65,6 +74,7 @@ namespace ft
 					throw (ft::InvalidIteratorException<typename ft::is_input_iterator_tagged<typename ft::iterator_traits<InputIterator>::iterator_category >::type>());
 				this->insert(first, last);
 			}
+			
 			map(const map& x)
 			:
 				_alloc(x._alloc),
@@ -73,6 +83,7 @@ namespace ft
 			{
 				this->insert(x.begin(), x.end());
 			}
+
 			~map()
 			{ this->clear(); }
 
@@ -236,11 +247,6 @@ namespace ft
 			ft::pair<iterator, iterator> equal_range (const key_type& k)
 			{ return (ft::make_pair(this->lower_bound(k), this->upper_bound(k))); }
 
-		private:
-
-			allocator_type                          _alloc;
-			Compare                                 _comp;
-			Binary_search_tree<value_type, Compare>  _bst;
 
 	};
 }

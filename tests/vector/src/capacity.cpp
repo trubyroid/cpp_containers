@@ -1,5 +1,5 @@
 
-void capacity()
+void vector_capacity()
 {
 	{
 		std::vector<int>		og_v(3, 3);

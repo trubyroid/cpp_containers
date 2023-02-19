@@ -1,5 +1,5 @@
 
-void constructors(void)
+void vector_constructors(void)
 {
 	{
 		test_name("Testing the default constructor");

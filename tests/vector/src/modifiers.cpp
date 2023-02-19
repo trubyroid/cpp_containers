@@ -1,14 +1,5 @@
 
-void check_values(ft::vector<int> &mine, std::vector<int> &original)
-{	
-    assert(original.capacity() == mine.capacity());
-    assert(original.size() == mine.size());
-	
-	for (size_t i = 0; i < original.size(); i++)
-        assert(original[i] == mine[i]);
-}
-
-void modifiers(void)
+void vector_modifiers(void)
 {
 	ft::vector<int>			my_v(3, 3);
 	std::vector<int>		og_v(3, 3);
