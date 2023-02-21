@@ -16,14 +16,18 @@ void vector_elements(void)
 
 	{
 		test_name("Testing method .at() when out_of_range");
-		try{
-			og_v.at(3);}
-		catch(std::exception & error){
-			std::cout << COLOUR_DEFAULT << "Original: " << COLOUR_RED << "Exception caught: " << error.what() << COLOUR_DEFAULT << std::endl;}
-		try{
-			my_v.at(3);}
-		catch(std::exception & error){
-			std::cout << "Mine:     " << COLOUR_RED << "Exception caught: " << error.what() << COLOUR_DEFAULT << std::endl;}
+		try {
+			og_v.at(3);
+		}
+		catch (std::exception & error) {
+			std::cout << COLOUR_DEFAULT << "Original: " << COLOUR_RED << "Exception caught: " << error.what() << COLOUR_DEFAULT << std::endl;
+		}
+		try {
+			my_v.at(3);
+		}
+		catch (std::exception & error) {
+			std::cout << "Mine:     " << COLOUR_RED << "Exception caught: " << error.what() << COLOUR_DEFAULT << std::endl;
+		}
 	}
 
 	{

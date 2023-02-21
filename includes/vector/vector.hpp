@@ -16,7 +16,7 @@ namespace ft
     template <class T>
 	class vector{
         public:
-	        typedef T value_type;
+	        typedef T 												value_type;
 	        typedef std::allocator<T>								allocator_type;
 	        typedef typename	allocator_type::size_type			size_type;
 	        typedef typename	allocator_type::difference_type		difference_type;

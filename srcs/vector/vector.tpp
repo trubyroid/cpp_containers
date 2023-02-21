@@ -1,7 +1,7 @@
 namespace ft
 {
 
-// --------------------- Construct/Copy/Destruct --------------------- //
+// --------------------- Member functions ---------------------------- //
 
 template<class value_type>
 vector<value_type>::vector() {
@@ -214,7 +214,6 @@ bool vector<value_type>::operator<(const vector& other) {
     for (size_type i = 0; i < other.size(); ++i) {
         if (this->_base_array[i] > other._base_array[i])
             return false;
-        // if (i == other.size() || this->_base_array[i] > other.at(i)) {
         if (i == this->_size || this->_base_array[i] < other._base_array[i]) {
             return true;
         }
@@ -227,7 +226,6 @@ bool vector<value_type>::operator>(const vector& other) {
     for (size_type i = 0; i < this->_size; ++i) {
         if (this->_base_array[i] < other._base_array[i])
             return false;
-        // if (i == other.size() || this->_base_array[i] > other.at(i)) {
         if (i == other.size() || this->_base_array[i] > other._base_array[i]) {
             return true;
         }
@@ -323,13 +321,14 @@ vector<value_type>::size() const {
 }
 
 #define STRING_MAX_SIZE 768614336404564650
+#define KLUDGE 768614336404564607
 
 template<class value_type>
 typename vector<value_type>::size_type
 vector<value_type>::max_size() const {\
     size_type val = (pow(2, 64) / sizeof(value_type));
 	val--;
-    if (val == 768614336404564607) {                            //костыль для std::string
+    if (val == KLUDGE) {
         val = STRING_MAX_SIZE;
     }
 	return val;

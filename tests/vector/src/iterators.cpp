@@ -61,14 +61,11 @@ void vector_iterators()
 		assert(*(og_r_it) == *(my_r_it));
 	}
 
-	std::vector<int>::const_reverse_iterator	og_r_it_const_end;
-	ft::vector<int>::const_reverse_iterator		my_r_it_const_end;
-
 	{
 		test_name("Testing vector.rend() const");
-		og_r_it_const_end = og_v_const.rend() - 1;
-		my_r_it_const_end = my_v_const.rend() - 1;
-		assert(*(og_r_it_const_end) == *(my_r_it_const_end));
+		og_r_it_const = og_v_const.rend() - 1;
+		my_r_it_const = my_v_const.rend() - 1;
+		assert(*(og_r_it_const) == *(my_r_it_const));
 
 		test_name("Testing vector.rbegin() const");
 		og_r_it_const = og_v_const.rbegin();

@@ -1,5 +1,5 @@
 #ifndef UTILS_HPP
-#define UTILS_HPP
+# define UTILS_HPP
 
 # include <type_traits>
 # include <stdio.h>
@@ -139,6 +139,7 @@ namespace ft {
 			return x < y;
 		}
 	};
+
 
 }
 

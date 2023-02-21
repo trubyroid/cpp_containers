@@ -90,7 +90,7 @@ int main(int argc, char** argv) {
 	
 	for (int i = 0; i < COUNT; ++i)
 	{
-		map_int.insert(ft::make_pair(rand(), rand()));						//что-то не так с моим make_pair
+		map_int.insert(std::make_pair(rand(), rand()));						//что-то не так с моим make_pair
 	}
 
 	int sum = 0;

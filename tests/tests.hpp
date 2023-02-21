@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <map>
+#include <string>
 #include <iterator>
 #include <iostream>
 #include <assert.h>
@@ -28,6 +29,7 @@
 #include "vector/src/modifiers.cpp"
 
 #include "map/src/constructors.cpp"
+#include "map/src/iterators.cpp"
 
 
 #endif
