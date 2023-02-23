@@ -281,6 +281,121 @@ void map<Key, T>::swap(map<Key,T> &x) {
 }
 
 // --------------------- Lookup -------------------------------------- //
+
+template<class Key, class T>
+typename map<Key, T>::iterator
+map<Key, T>::find(const key_type& k) {
+    Node* tmp = searchNode(_root, k);   
+
+    if (tmp)
+        return iterator(tmp, _lastElem, _comp);
+    
+    return end();
+}
+
+template<class Key, class T>
+typename map<Key, T>::const_iterator
+map<Key, T>::find(const key_type& k) const {
+    Node* tmp = searchNode(_root, k);   
+
+    if (tmp)
+        return const_iterator(tmp, _lastElem, _comp);
+    
+    return end();
+}
+
+template<class Key, class T>
+typename map<Key, T>::size_type
+map<Key, T>::count(const key_type& k) const {
+    Node* tmp = searchNode(_root, k);
+                
+    return tmp ? true: false;
+}
+
+template<class Key, class T>
+typename map<Key, T>::iterator
+map<Key, T>::lower_bound(const key_type& k) {
+    iterator it = begin();
+
+    for (; it != end(); ++it)
+        if (!_comp(it->first, k))
+            break;
+    
+    return it; 
+}
+
+template<class Key, class T>
+typename map<Key, T>::const_iterator
+map<Key, T>::lower_bound(const key_type& k) const {
+    const_iterator it = begin();
+
+    for (; it != end(); ++it)
+        if (!_comp(it->first, k))
+            break;
+    
+    return it;  
+}
+
+template<class Key, class T>
+typename map<Key, T>::iterator
+map<Key, T>::upper_bound(const key_type& k) {
+    iterator it = begin();
+
+    for (; it != end(); ++it)
+        if (_comp(k, it->first))
+            break;
+    
+    return it; 
+}
+
+template<class Key, class T>
+typename map<Key, T>::const_iterator
+map<Key, T>::upper_bound(const key_type& k) const {
+    const_iterator it = begin();
+
+    for (; it != end(); ++it)
+        if (_comp(k, it->first))
+            break;
+    
+    return it; 
+}
+
+template<class Key, class T>
+typename ft::pair<typename map<Key, T>::iterator,typename map<Key, T>::iterator>
+map<Key, T>::equal_range(const key_type& k) {
+    iterator it = upper_bound(k);
+
+    if (it != begin())
+    {
+        --it;
+        if (_comp(it->first, k) || _comp(k, it->first))
+            ++it;
+    }
+
+    iterator next(it);
+    if (it != end())
+        ++next;
+    
+    return make_pair<iterator, iterator>(it, next);
+}
+
+template<class Key, class T>
+typename ft::pair<typename map<Key, T>::const_iterator,typename map<Key, T>::const_iterator>
+map<Key, T>::equal_range(const key_type& k) const {
+    const_iterator it = upper_bound(k);
+
+    if (it != begin())
+    {
+        --it;
+        if (_comp(it->first, k) || _comp(k, it->first))
+            ++it;
+    }
+    const_iterator next(it);
+    if (it != end())
+        ++next;
+    return make_pair<const_iterator, const_iterator>(it, next);
+}
+
 // --------------------- Observers ----------------------------------- //
 
 template<class Key, class T>
