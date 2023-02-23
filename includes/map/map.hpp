@@ -142,8 +142,8 @@ namespace ft
             const_iterator                          lower_bound(const key_type& k) const;
             iterator                                upper_bound(const key_type& k);
             const_iterator                          upper_bound(const key_type& k) const;
-            pair<iterator,iterator>                 equal_range(const key_type& k);
-            pair<const_iterator,const_iterator>     equal_range(const key_type& k) const;
+            ft::pair<iterator,iterator>             equal_range(const key_type& k);
+            ft::pair<const_iterator,const_iterator> equal_range(const key_type& k) const;
 
 // --------------------- Observers ---------------------------- //
 
@@ -167,7 +167,7 @@ namespace ft
             void                                    rotateRight(Node** root, Node* nodeGoingDown);
             void                                    rotateLeft(Node** root, Node* nodeGoingDown);
             void                                    balanceTheTree(Node** root, Node* node); 
-            
+
     };
 
 // --------------------- Non-member functions ----------------- //
