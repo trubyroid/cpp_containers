@@ -15,5 +15,4 @@ int main() {
     vector_modifiers();
     std::cout << COLOUR_GREEN << "Modifiers test passed successfully." << std::endl;
     std::cout << COLOUR_DEFAULT << std::endl;
-    std::cout << COLOUR_GREEN << "All tests passed successfully." << std::endl;
 }

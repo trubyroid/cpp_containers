@@ -3,38 +3,35 @@
 CC          					=    	c++
 VERSION     					=    	-std=c++98
 CPPFLAGS    					=    	-Wall -Wextra -Werror
-NAME        					=		containers
 RM          					=    	rm -rf
 
 SRC_PATH						=		./srcs
-OBJ_PATH						=		./objs
-VECTOR_TESTS_PATH				=		./tests/vector/tests.cpp
+VECTOR_TEST						=		./tests/vector/tests.cpp
+MAP_TEST						=		./tests/map/tests.cpp
+MAIN_FILE						=		./main.cpp	
 
-MAIN							=		./main.cpp
-SRC								=		
 
-OBJ_NAME						=		$(SRC:.cpp=.o)
+all: vector map main
 
-OBJ								=		$(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
-
-all: $(NAME)
-
-$(NAME): $(OBJ)
-	$(CC) $(VERSION) $(CPPFLAGS) -o $(NAME) $(OBJ)
-
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.cpp
-		@mkdir $(OBJ_PATH) 2> /dev/null || true
-		$(CC) $(VERSION) -o $@ -c $<
-
-vector test: 
-	@$(CC) $(VERSION) $(CPPFLAGS) $(VECTOR_TESTS_PATH)
+vector: 
+	@$(CC)	$(VECTOR_TEST)
 	@./a.out
-	@$(RM) a.out
+	@make clean
+
+map: 
+	@$(CC)	$(MAP_TEST)
+	@./a.out
+	@make clean
+
+main:
+	@$(CC) $(VERSION) $(CPPFLAGS) $(MAIN_FILE)
+	@./a.out 1
+	@make clean
 
 clean: 
-	@$(RM) $(OBJ_PATH)
+	@$(RM) a.out
 
-fclean:          clean
-	@$(RM) $(NAME)
+fclean:
+	@$(RM) a.out
 
-re: fclean all
+re: vector map main clean fclean all

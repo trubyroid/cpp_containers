@@ -11,8 +11,8 @@ void    map_observers(void)
 
     {
         test_name("Testing method .key_comp()");
-        auto std_k_comp = std_map.key_comp();
-        auto my_k_comp = my_map.key_comp();
+        std::map<int,int>::key_compare std_k_comp = std_map.key_comp();
+        ft::map<int,int>::key_compare my_k_comp = my_map.key_comp();
 
         assert(std_k_comp(5,4) == my_k_comp(5,4));
         assert(std_k_comp(4,5) == my_k_comp(4,5));
@@ -21,8 +21,8 @@ void    map_observers(void)
 
     {
         test_name("Testing method .value_comp()");
-        auto std_v_comp = std_map.value_comp();
-        auto my_v_comp = my_map.value_comp();
+        std::map<int,int>::value_compare std_v_comp = std_map.value_comp();
+        ft::map<int,int>::value_compare my_v_comp = my_map.value_comp();
 
         std::pair<int,int>  std_p_1(5,6);
         std::pair<int,int>  std_p_2(7,8);

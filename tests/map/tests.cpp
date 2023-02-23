@@ -16,5 +16,4 @@ int main() {
     map_observers();
     std::cout << COLOUR_GREEN << "Observers test passed successfully." << std::endl;
     std::cout << COLOUR_DEFAULT << std::endl;
-    std::cout << COLOUR_GREEN << "All tests passed successfully." << std::endl;
 }
