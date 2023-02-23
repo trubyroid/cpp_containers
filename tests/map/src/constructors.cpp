@@ -1,5 +1,5 @@
 
-void map_members_n_elements(void)
+void    map_members_n_elements(void)
 {
     test_name("Default constructors test");
     ft::map<int, int>                           my_map_1;

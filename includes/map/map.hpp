@@ -26,9 +26,9 @@ namespace ft
         public:
 
             typedef Key                                             			        key_type;
+            typedef T                                               			        mapped_type;
             typedef ft::less<Key>                                         		        key_compare;
             typedef std::allocator<ft::pair<const Key, T> >                             allocator_type;
-            typedef T                                               			        mapped_type;
             
             typedef ft::pair<const key_type, mapped_type>           			        value_type;
             typedef long int                                        			        difference_type;
@@ -80,7 +80,7 @@ namespace ft
 
 // --------------------- Member functions --------------------- //
 
-			explicit map(const key_compare& comp = key_compare(),
+			map(const key_compare& comp = key_compare(),
                         const allocator_type& alloc = allocator_type());
 
             template<class InputIterator>
@@ -114,107 +114,28 @@ namespace ft
 
 // --------------------- Capacity ----------------------------- //
 
-            bool empty() const              { return _size == 0; }
-            size_type size() const;
-            
-            size_type       max_size() const
-            {
-                if (sizeof(value_type) == 1)
-                    return static_cast<size_type>(pow(2.0, 64.0) / 2.0) - 1;
-                return static_cast<size_type>(pow(2.0, 64.0) / static_cast<double>(sizeof(value_type))) - 1;
-            }
+            bool                                    empty() const;
+            size_type                               size() const;
+            size_type                               max_size() const;
 
+// --------------------- Modifiers ---------------------------- //
 
-            ft::pair<iterator,bool> insert (const value_type& val)
-            {
-                Node* elemIsPresent = searchNode(_root, val.first);
-                if (elemIsPresent)
-                    return ft::pair<iterator, bool>(iterator(elemIsPresent, _lastElem, _comp), false);
-
-                ++_size;
-                return ft::pair<iterator, bool>(iterator(insertNode(_root, val), _lastElem, _comp), true);
-            }
-
-            iterator insert (iterator position, const value_type& val)
-            {   
-
-                if (position->first > val.first)
-                {
-                    iterator prev(position);
-                    --prev;
-                    while (prev != end() && prev->first >= val.first)
-                    {
-                        --position;
-                        --prev;
-                    }
-                }
-
-                else if (position->first < val.first)
-                {
-                    iterator next(position);
-                    ++next;
-                    while (next != end() && next->first <= val.first)
-                    {
-                        ++position;
-                        ++next;
-                    }
-                }
-
-                if (position != end() && val.first == position->first)
-                    return position;
-
-                ++_size;
-                return iterator(insertNode(position.getNode(), val), _lastElem, _comp);
-            }
+            void                                    clear();
+            ft::pair<iterator,bool>                 insert(const value_type& val);
+            iterator                                insert(iterator position, const value_type& val);
  
             template <class InputIterator>
             void insert (InputIterator first, InputIterator last,
-                        typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type* = 0)
-            {
-                while (first != last)
-                    insert(*first++);
-            }
+                        typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type* = 0);
 
-            void erase (iterator position)
-            {
-                deleteNode(position.getNode(), position->first);
-                --_size;
-            }
+            void                                    erase(iterator position);
+            size_type                               erase(const key_type& k);
+            void                                    erase(iterator first, iterator last);
+            void                                    swap(map& x);
 
-            size_type erase (const key_type& k)
-            {
-                size_type ret = deleteNode(_root, k);
-                _size -= ret;
-                return ret;
-            }
+// --------------------- Lookup ------------------------------- //
 
-            void erase (iterator first, iterator last)
-            {
-                while (first != last)
-                {
-                    iterator tmp(first);
-                    ++first;
-                    erase(tmp);
-                }
-            }
-
-            void swap (map& x)
-            {
-                swap(_root, x._root);
-                swap(_lastElem, x._lastElem);
-                swap(_size, x._size);
-                swap(_comp, x._comp);
-                swap(_allocPair, x._allocPair);
-                swap(_allocNode, x._allocNode);
-            }
-
-            void clear()        { erase(begin(), end()); }
-
-            key_compare key_comp() const        { return _comp; }
-
-            value_compare value_comp() const    { return value_compare(_comp); }
-
-            iterator find(const key_type& k)
+            iterator                                find(const key_type& k)
             {
                 Node* tmp = searchNode(_root, k);
 
@@ -224,7 +145,7 @@ namespace ft
                 return end();
             }
 
-            const_iterator find(const key_type& k) const
+            const_iterator                          find(const key_type& k) const
             {
                 Node* tmp = searchNode(_root, k);
 
@@ -234,14 +155,14 @@ namespace ft
                 return end();
             }
 
-            size_type count (const key_type& k) const
+            size_type                               count(const key_type& k) const
             {
                 Node* tmp = searchNode(_root, k);
                 
                 return tmp ? true: false;
             }
 
-            iterator lower_bound(const key_type& k)
+            iterator                                lower_bound(const key_type& k)
             {
                 iterator it = begin();
 
@@ -252,7 +173,7 @@ namespace ft
                 return it;  
             }
             
-            const_iterator lower_bound(const key_type& k) const
+            const_iterator                          lower_bound(const key_type& k) const
             {
                 const_iterator it = begin();
 
@@ -263,7 +184,7 @@ namespace ft
                 return it;  
             }
 
-            iterator upper_bound(const key_type& k)
+            iterator                                upper_bound(const key_type& k)
             {
                 iterator it = begin();
 
@@ -274,7 +195,7 @@ namespace ft
                 return it;  
             }
 
-            const_iterator upper_bound(const key_type& k) const
+            const_iterator                          upper_bound(const key_type& k) const
             {
                 const_iterator it = begin();
 
@@ -285,7 +206,7 @@ namespace ft
                 return it;  
             }
 
-            pair<iterator,iterator> equal_range(const key_type& k)
+            pair<iterator,iterator>                 equal_range(const key_type& k)
             {
                 iterator it = upper_bound(k);
 
@@ -304,7 +225,7 @@ namespace ft
                 return make_pair<iterator, iterator>(it, next);
             }
 
-            pair<const_iterator,const_iterator> equal_range(const key_type& k) const
+            pair<const_iterator,const_iterator>     equal_range(const key_type& k) const
             {
                 const_iterator it = upper_bound(k);
 
@@ -322,23 +243,14 @@ namespace ft
                 
                 return make_pair<const_iterator, const_iterator>(it, next);
             }
+
+// --------------------- Observers ---------------------------- //
+
+            key_compare                             key_comp() const;
+            value_compare                           value_comp() const;
             
+// --------------------- Red-Black Tree ----------------------- //
         private:
-
-            template <typename U>
-            void swap(U& a, U& b)
-            {
-                U tmp = a;
-                a = b;
-                b = tmp;
-            }
-
-            template <class T1,class T2>
-            pair<T1,T2> make_pair(T1 x, T2 y) const
-            {
-                return pair<T1,T2>(x,y);
-            }
-
 
             Node* createNode(const value_type& pair)
             {
@@ -645,8 +557,20 @@ namespace ft
                 }
             }      
     };
+
+// --------------------- Non-member functions ----------------- //
+
+    template <typename U>
+    void swap(U& a, U& b)
+    {
+        U tmp = a;
+        a = b;
+        b = tmp;
+    }
+
 }
 
 #include "../../srcs/map/map.tpp"
+#include "../../srcs/map/red_black_tree.tpp"
 
 #endif

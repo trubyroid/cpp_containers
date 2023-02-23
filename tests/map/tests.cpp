@@ -7,10 +7,14 @@ int main() {
     std::cout << COLOUR_GREEN << "Elements access test passed successfully." << std::endl;
     map_iterators();
     std::cout << COLOUR_GREEN << "Iterators test passed successfully." << std::endl;
-    // capacity();
-    // std::cout << COLOUR_GREEN << "Capacity methods test passed successfully." << std::endl;
-    // modifiers();
-    // std::cout << COLOUR_GREEN << "Modifiers test passed successfully." << std::endl;
+    map_capacity();
+    std::cout << COLOUR_GREEN << "Capacity methods test passed successfully." << std::endl;
+    map_modifiers();
+    std::cout << COLOUR_GREEN << "Modifiers test passed successfully." << std::endl;
+    map_lookup();
+    std::cout << COLOUR_GREEN << "Lookup test passed successfully." << std::endl;
+    map_observers();
+    std::cout << COLOUR_GREEN << "Observers test passed successfully." << std::endl;
     std::cout << COLOUR_DEFAULT << std::endl;
     std::cout << COLOUR_GREEN << "All tests passed successfully." << std::endl;
 }

@@ -47,7 +47,7 @@ map<Key, T>::map(const map& copy) {
 
     for (const_iterator it = copy.begin(); it != copy.end(); ++it) {
         this->insert(*it);
-        _size--;
+        this->_size--;
     }
 }
 
@@ -81,8 +81,8 @@ map<Key, T>::operator[](const key_type& key) {
     if (tmp) {
         return tmp->content.second;
 	}
-    value_type val = make_pair<key_type, mapped_type>(key, mapped_type());
-    _size++;
+    value_type val = ft::make_pair<key_type, mapped_type>(key, mapped_type());
+    this->_size++;
     return insertNode(_root, val)->content.second;
 }
 
@@ -166,13 +166,133 @@ map<Key, T>::rend() const {
 
 // --------------------- Capacity ------------------------------------ //
 
-
-
+template<class Key, class T>
+bool map<Key, T>::empty() const {
+    return this->_size == 0;
+}
 
 template<class Key, class T>
 typename map<Key, T>::size_type
 map<Key, T>::size() const {
     return this->_size;
+}
+
+#define STRING_KLUDGE 384307168202282304
+#define STRING_SIZE 2305843009213693952
+
+template<class Key, class T>
+typename map<Key, T>::size_type
+map<Key, T>::max_size() const {
+    size_type val = (pow(2, 64) / sizeof(value_type));
+    if (val == STRING_KLUDGE)
+	    val = STRING_SIZE;
+    else
+        val *= 2;
+    return val / 10;
+}
+
+// --------------------- Modifiers ----------------------------------- //
+
+template<class Key, class T>
+void map<Key, T>::clear() {
+    erase(begin(), end());
+}
+
+template<class Key, class T>
+ft::pair<typename map<Key, T>::iterator,bool> map<Key, T>::insert(const value_type& val) {
+    Node* elemIsPresent = searchNode(_root, val.first);
+    if (elemIsPresent)
+        return ft::pair<iterator, bool>(iterator(elemIsPresent, _lastElem, _comp), false);
+
+    this->_size++;
+    return ft::pair<iterator, bool>(iterator(insertNode(_root, val), _lastElem, _comp), true);
+}
+
+template<class Key, class T>
+typename map<Key, T>::iterator
+map<Key, T>::insert(iterator position, const value_type& val) {
+	if (position->first > val.first)
+    {
+        iterator prev(position);
+        --prev;
+        while (prev != end() && prev->first >= val.first)
+        {
+            --position;
+            --prev;
+        }
+    }
+    else if (position->first < val.first)
+    {
+        iterator next(position);
+        ++next;
+        while (next != end() && next->first <= val.first)
+        {
+            ++position;
+            ++next;
+        }
+    }
+    if (position != end() && val.first == position->first)
+        return position;
+    this->_size++;
+    return iterator(insertNode(position.getNode(), val), _lastElem, _comp);
+}
+
+template<class Key, class T>
+template <class InputIterator>
+void map<Key, T>::insert(InputIterator first, InputIterator last,
+    typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type*) {
+    while (first != last)
+        insert(*first++);
+}
+
+template<class Key, class T>
+void map<Key, T>::erase(typename map<Key, T>::iterator position) {
+    deleteNode(position.getNode(), position->first);
+    this->_size--;
+}
+
+template<class Key, class T>
+typename map<Key, T>::size_type
+map<Key, T>::erase(const typename map<Key, T>::key_type& k) {
+    size_type ret = deleteNode(_root, k);
+    this->_size -= ret;
+    return ret;
+}
+
+template<class Key, class T>
+void map<Key, T>::erase(typename map<Key, T>::iterator first, 
+    typename map<Key, T>::iterator last) {
+    while (first != last)
+    {
+        iterator tmp(first);
+        ++first;
+        erase(tmp);
+    }
+}
+
+template<class Key, class T>
+void map<Key, T>::swap(map<Key,T> &x) {
+    ft::swap(_root, x._root);
+    ft::swap(_lastElem, x._lastElem);
+    ft::swap(_size, x._size);
+    ft::swap(_comp, x._comp);
+    ft::swap(_allocPair, x._allocPair);
+    ft::swap(_allocNode, x._allocNode);
+}
+
+// --------------------- Lookup -------------------------------------- //
+// --------------------- Observers ----------------------------------- //
+
+template<class Key, class T>
+typename map<Key, T>::key_compare
+map<Key, T>::key_comp() const {
+    return _comp; 
+}
+
+template<class Key, class T>
+typename map<Key, T>::value_compare
+map<Key, T>::value_comp() const {
+    return value_compare(_comp);
 }
 
 }

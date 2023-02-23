@@ -30,6 +30,10 @@
 
 #include "map/src/constructors.cpp"
 #include "map/src/iterators.cpp"
+#include "map/src/capacity.cpp"
+#include "map/src/modifiers.cpp"
+#include "map/src/lookup.cpp"
+#include "map/src/observers.cpp"
 
 
 #endif
