@@ -28,7 +28,6 @@ void    map_members_n_elements(void)
         assert(my_map_2.at("Hello") == std_map_2.at("Hello"));
         assert(my_map_2.at("How are you") == std_map_2.at("How are you"));
         assert(my_map_2.at("Thanks") == std_map_2.at("Thanks"));
-
     }
 
     {
