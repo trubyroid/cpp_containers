@@ -19,21 +19,21 @@
 # define COLOUR_BLUE "\33[1;34m"
 # define COLOUR_PURPLE "\33[35m"
 
-#include "test_utils.cpp"
+#include "test_utils.tpp"
 
-#include "vector/src/constructors.cpp"
-#include "vector/src/operators.cpp"
-#include "vector/src/capacity.cpp"
-#include "vector/src/elements.cpp"
-#include "vector/src/iterators.cpp"
-#include "vector/src/modifiers.cpp"
+#include "vector/src/constructors.tpp"
+#include "vector/src/operators.tpp"
+#include "vector/src/capacity.tpp"
+#include "vector/src/elements.tpp"
+#include "vector/src/iterators.tpp"
+#include "vector/src/modifiers.tpp"
 
-#include "map/src/constructors.cpp"
-#include "map/src/iterators.cpp"
-#include "map/src/capacity.cpp"
-#include "map/src/modifiers.cpp"
-#include "map/src/lookup.cpp"
-#include "map/src/observers.cpp"
+#include "map/src/constructors.tpp"
+#include "map/src/iterators.tpp"
+#include "map/src/capacity.tpp"
+#include "map/src/modifiers.tpp"
+#include "map/src/lookup.tpp"
+#include "map/src/observers.tpp"
 
 
 #endif
