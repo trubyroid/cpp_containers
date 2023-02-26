@@ -27,12 +27,14 @@ template<class value_type>
 vector<value_type>::vector(const vector& copy) {
     this->_size = copy.size();
     this->_capacity = copy.size();
-    this->_base_array = this->_allocator.allocate(this->_capacity);
-    if (!this->_base_array) {
-        throw std::bad_alloc();
-    }
-    for (size_type i = 0; i < copy.size(); i++) {
-        this->_allocator.construct(this->_base_array + i, *(copy._base_array + i));
+    if (this->_capacity) {
+        this->_base_array = this->_allocator.allocate(this->_capacity);
+        if (!this->_base_array) {
+            throw std::bad_alloc();
+        }
+        for (size_type i = 0; i < copy.size(); i++) {
+            this->_allocator.construct(this->_base_array + i, *(copy._base_array + i));
+        }
     }
 }
 
@@ -178,12 +180,14 @@ vector<value_type> &vector<value_type>::operator=(const vector& copy) {
     if (copy.size() > this->_capacity) {
         this->_capacity = copy.size();
     }
-    this->_base_array = this->_allocator.allocate(this->_capacity);
-    if (!this->_base_array) {
-        throw std::bad_alloc();
-    }
-    for (size_type i = 0; i < this->_size; i++) {
-        this->_allocator.construct(this->_base_array + i, *(copy._base_array + i));
+    if (this->_capacity) {
+        this->_base_array = this->_allocator.allocate(this->_capacity);
+        if (!this->_base_array) {
+            throw std::bad_alloc();
+        }
+        for (size_type i = 0; i < this->_size; i++) {
+            this->_allocator.construct(this->_base_array + i, *(copy._base_array + i));
+        }
     }
     return *this;
 }
