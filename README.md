@@ -1,8 +1,9 @@
-STL CONTAINERS
-==============
-SCHOOL 21 PROJECT
+CONTAINERS
+==========
+В рамках этого проекта я воссоздал поведение двух stl-контейнеров.  
+Более известны они как `std::vector` и `std:map`.  
 
-Here I repeate the behavior of std::vector and std:map.  
+# О проекте
+Проект был выполнен и сдан на отлично в рамках учебной программы французской школы программирования Ecole 42.
+Весь проект был проверен на утечки памяти. Помимо того, что нужно было реимплементировать контейнеры, изначально был дан файл main.cpp. Стояла задача сделать так, чтобы он работал с воссозданными контейнерами и некоторыми функциями, которые также нужно было написать, среди которых:
 
-Use "make vector" or "make map" to see what exactly I implemented and checked in comparison with stl container.  
-Main file from subject. Use "make main" to compile and check it. 
